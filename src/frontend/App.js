@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { Button } from '@mui/material'
 
 export default App = () => {
 
@@ -11,9 +12,9 @@ export default App = () => {
 
   return (
     <div className="App">
-        <p> Grypsuje...</p>
+        <p className="text-3xl font-bold underline"> Grypsuje...</p>
         <button onClick={apiCall}>Make API Call</button>
-
+        <Button>Tomek</Button>
 
     </div>
   );
