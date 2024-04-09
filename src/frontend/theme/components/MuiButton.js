@@ -1,8 +1,7 @@
 export const MuiButton = {
-    styleOverrides: {
-        root: {
-            color: 'pink',
-            backgroundColor: 'blue'
-        }
-    }
-}
+  styleOverrides: {
+    root: {
+      backgroundColor: "lightskyblue",
+    },
+  },
+};

@@ -1,12 +1,9 @@
+import { Box, Button, AppBar, Toolbar, IconButton } from "@mui/material";
 import {
-  Box,
-  Button,
-  AppBar,
-  Toolbar,
-  IconButton,
-  Typography,
-} from "@mui/material";
-import { Menu } from "@mui/icons-material";
+  AccountCircleSharp,
+  Menu,
+  ShoppingCartSharp,
+} from "@mui/icons-material";
 
 export function Header() {
   return (
@@ -22,10 +19,40 @@ export function Header() {
           >
             <Menu />
           </IconButton>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            News
-          </Typography>
-          <Button color="inherit">Login</Button>
+          <Box
+            sx={{
+              display: "flex",
+              flexGrow: 1,
+              justifyContent: "Center",
+              gap: 2,
+              width: 1,
+            }}
+          >
+            <Button variant="contained" color="warning">
+              O nas
+            </Button>
+            <Button>Cele</Button>
+            <Button>Plany Treningowe</Button>
+            <Button>Kontakt</Button>
+          </Box>
+          <IconButton
+            size="large"
+            edge="start"
+            color="red"
+            aria-label="AccountCircleSharpIcon"
+            sx={{ mr: 2 }}
+          >
+            <AccountCircleSharp />
+          </IconButton>
+          <IconButton
+            size="large"
+            edge="start"
+            color="red"
+            aria-label="AccountCircleSharpIcon"
+            sx={{ mr: 2 }}
+          >
+            <ShoppingCartSharp />
+          </IconButton>
         </Toolbar>
       </AppBar>
     </Box>
