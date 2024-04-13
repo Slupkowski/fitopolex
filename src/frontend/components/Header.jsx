@@ -15,51 +15,37 @@ import {
 export function Header() {
   return (
     <AppBar>
-      <Toolbar>
-        <IconButton
-          size="large"
-          edge="start"
-          color="inherit"
-          aria-label="menu"
-          sx={{ mr: 2 }}
-        >
-          <Menu />
+      <Toolbar
+        variant="regular"
+        sx={{
+          display: "flex",
+          justifyContent: "space-between",
+          padding: "10px 24px 10px 24px",
+          gap: "30px",
+        }}
+      >
+        <IconButton size="large" aria-label="AccountCircleSharpIcon">
+          <ShoppingCartSharp />
         </IconButton>
+        <ButtonGroup fullWidth={true}>
+          <Button>O nas</Button>
+          <Button>Cele</Button>
+          <Button>Plany Treningowe</Button>
+          <Button>Kontakt</Button>
+        </ButtonGroup>
         <Box
           sx={{
             display: "flex",
-            flexGrow: 1,
-            justifyContent: "Center",
-            gap: 2,
+            flexDirection: "row",
           }}
         >
-          <ButtonGroup>
-            <Button variant="contained" color="warning">
-              O nas
-            </Button>
-            <Button>Cele</Button>
-            <Button>Plany Treningowe</Button>
-            <Button>Kontakt</Button>
-          </ButtonGroup>
+          <IconButton size="large" aria-label="AccountCircleSharpIcon">
+            <AccountCircleSharp />
+          </IconButton>
+          <IconButton size="large" aria-label="AccountCircleSharpIcon">
+            <ShoppingCartSharp />
+          </IconButton>
         </Box>
-        <IconButton
-          size="large"
-          edge="start"
-          color="red"
-          aria-label="AccountCircleSharpIcon"
-          sx={{ mr: 2 }}
-        >
-          <AccountCircleSharp />
-        </IconButton>
-        <IconButton
-          size="large"
-          edge="start"
-          color="red"
-          aria-label="AccountCircleSharpIcon"
-          sx={{ mr: 2 }}
-        >
-          <ShoppingCartSharp />
-        </IconButton>
       </Toolbar>
     </AppBar>
   );
