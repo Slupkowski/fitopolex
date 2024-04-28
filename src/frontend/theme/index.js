@@ -1,9 +1,10 @@
-import { createTheme} from '@mui/material/styles';
-import { createComponents } from './components';
-
+import { createTheme } from "@mui/material/styles";
+import { createComponents } from "./components";
+import { createPalette } from "./palette";
 
 const theme = createTheme({
-  components: createComponents()
+  components: createComponents(),
+  palette: createPalette(),
 });
 
 export default theme;

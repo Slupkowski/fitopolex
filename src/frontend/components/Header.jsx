@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import {
   Box,
   Button,
@@ -5,6 +6,7 @@ import {
   Toolbar,
   IconButton,
   ButtonGroup,
+  Popover,
 } from "@mui/material";
 import {
   AccountCircleSharp,
@@ -13,6 +15,19 @@ import {
 } from "@mui/icons-material";
 
 export function Header() {
+  const [anchorEl, setAnchorEl] = useState(null);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const open = Boolean(anchorEl);
+  const id = open ? "simple-popover" : undefined;
+
   return (
     <AppBar>
       <Toolbar
@@ -24,12 +39,34 @@ export function Header() {
           gap: "30px",
         }}
       >
-        <IconButton size="large" aria-label="AccountCircleSharpIcon">
-          <ShoppingCartSharp />
-        </IconButton>
+        <h1>MAUPAPP</h1>
+        <IconButton
+          size="large"
+          aria-label="AccountCircleSharpIcon"
+        ></IconButton>
         <ButtonGroup fullWidth={true}>
           <Button>O nas</Button>
-          <Button>Cele</Button>
+          <Button onClick={handleClick}>Cele</Button>
+          <Popover
+            id={id}
+            open={open}
+            anchorEl={anchorEl}
+            onClose={handleClose}
+            anchorOrigin={{
+              vertical: "bottom",
+              horizontal: "center",
+            }}
+            transformOrigin={{
+              vertical: "top",
+              horizontal: "center",
+            }}
+          >
+            <Box sx={{ display: "flex", flexDirection: "column" }}>
+              <Button>Sraka</Button>
+              <Button>Ptaka</Button>
+              <Button>Kaka</Button>
+            </Box>
+          </Popover>
           <Button>Plany Treningowe</Button>
           <Button>Kontakt</Button>
         </ButtonGroup>
