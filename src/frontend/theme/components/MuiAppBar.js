@@ -1,7 +1,11 @@
+import { createPalette } from "../palette";
+
+const { blue } = createPalette();
+
 export const MuiAppBar = {
   styleOverrides: {
     root: {
-      backgroundColor: "rgb(50, 105, 168)",
+      backgroundColor: blue[50],
     },
   },
 };

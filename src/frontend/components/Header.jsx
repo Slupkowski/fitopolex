@@ -7,6 +7,7 @@ import {
   IconButton,
   ButtonGroup,
   Popover,
+  Typography,
 } from "@mui/material";
 import {
   AccountCircleSharp,
@@ -39,7 +40,7 @@ export function Header() {
           gap: "30px",
         }}
       >
-        <h1>MAUPAPP</h1>
+        <Typography color="blue.250">MAUPAPP</Typography>
         <IconButton
           size="large"
           aria-label="AccountCircleSharpIcon"
@@ -62,9 +63,9 @@ export function Header() {
             }}
           >
             <Box sx={{ display: "flex", flexDirection: "column" }}>
-              <Button>Sraka</Button>
-              <Button>Ptaka</Button>
-              <Button>Kaka</Button>
+              <Button>Jak schudnąć</Button>
+              <Button>Jak przytyć</Button>
+              <Button>Jak nabrać masy mięśniowej</Button>
             </Box>
           </Popover>
           <Button>Plany Treningowe</Button>
