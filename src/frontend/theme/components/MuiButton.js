@@ -1,4 +1,3 @@
-import { Opacity } from "@mui/icons-material";
 import { createPalette } from "../palette";
 const { blue } = createPalette();
 export const MuiButton = {

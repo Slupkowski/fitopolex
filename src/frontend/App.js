@@ -1,6 +1,5 @@
 import axios from "axios";
 import { Route, Routes } from "react-router";
-import { Header } from "./components/Header";
 import { Contact } from "./pages/Contact";
 import { Plans } from "./pages/Plans";
 import { Welcome } from "./pages/Welcome";
@@ -16,9 +15,9 @@ const App = () => {
   return (
     <div>
       <Routes>
-        <Route path="/" element={<Welcome />} />
-        <Route path="/plans" element={<Plans />} />
-        <Route path="/contact" element={<Contact />} />
+        <Route exact path="/" element={<Welcome />} />
+        <Route exact path="/plans" element={<Plans />} />
+        <Route exact path="/contact" element={<Contact />} />
       </Routes>
 
       {/* <p className="text-3xl font-bold underline"> Grypsuje...</p>

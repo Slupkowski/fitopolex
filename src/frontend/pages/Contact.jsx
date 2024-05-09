@@ -1,3 +1,5 @@
+import { Header } from "../components/Header";
+
 export const Contact = () => {
-  return <h1>Ciupa</h1>;
+  return <Header />;
 };

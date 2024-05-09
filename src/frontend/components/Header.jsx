@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
 import {
   Box,
   Button,
@@ -18,12 +19,37 @@ import {
 export function Header() {
   const [anchorEl, setAnchorEl] = useState(null);
 
+  const navigate = useNavigate();
+
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
 
   const handleClose = () => {
     setAnchorEl(null);
+  };
+
+  const handleClickPlans = () => {
+    navigate("/plans");
+  };
+
+  const handleClickContact = () => {
+    navigate("/contact");
+  };
+  const handleClickLoseWeight = () => {
+    navigate("/loseweight");
+  };
+  const handleClickGainMuscle = () => {
+    navigate("/gainmuscle");
+  };
+  const handleClickGainWeight = () => {
+    navigate("/gainweight");
+  };
+  const handleClickAbout = () => {
+    navigate("/about");
+  };
+  const handleClickHome = () => {
+    navigate("/");
   };
 
   const open = Boolean(anchorEl);
@@ -40,13 +66,15 @@ export function Header() {
           gap: "30px",
         }}
       >
-        <Typography color="blue.250">MAUPAPP</Typography>
+        <h1 color="blue.250" onClick={handleClickHome}>
+          MAUPAPP
+        </h1>
         <IconButton
           size="large"
           aria-label="AccountCircleSharpIcon"
         ></IconButton>
         <ButtonGroup fullWidth={true}>
-          <Button>O nas</Button>
+          <Button onClick={handleClickAbout}>O nas</Button>
           <Button onClick={handleClick}>Cele</Button>
           <Popover
             id={id}
@@ -63,13 +91,15 @@ export function Header() {
             }}
           >
             <Box sx={{ display: "flex", flexDirection: "column" }}>
-              <Button>Jak schudnąć</Button>
-              <Button>Jak przytyć</Button>
-              <Button>Jak nabrać masy mięśniowej</Button>
+              <Button onClick={handleClickLoseWeight}>Jak schudnąć</Button>
+              <Button onClick={handleClickGainWeight}>Jak przytyć</Button>
+              <Button onClick={handleClickGainMuscle}>
+                Jak nabrać masy mięśniowej
+              </Button>
             </Box>
           </Popover>
-          <Button>Plany Treningowe</Button>
-          <Button>Kontakt</Button>
+          <Button onClick={handleClickPlans}>Plany Treningowe</Button>
+          <Button onClick={handleClickContact}>Kontakt</Button>
         </ButtonGroup>
         <Box
           sx={{
