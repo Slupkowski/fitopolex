@@ -1,5 +1,5 @@
 import { Header } from "../components/Header";
 
-export const Plans = () => {
+export const About = () => {
   return <Header />;
 };

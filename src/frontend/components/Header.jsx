@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import {
   Box,
   Button,
@@ -8,7 +8,6 @@ import {
   IconButton,
   ButtonGroup,
   Popover,
-  Typography,
 } from "@mui/material";
 import {
   AccountCircleSharp,
