@@ -27,7 +27,6 @@ const App = () => {
         <Route exact path="/gainweight" element={<GainWeight />} />
         <Route exact path="/loseweight" element={<LoseWeight />} />
       </Routes>
-
       {/* <p className="text-3xl font-bold underline"> Grypsuje...</p>
       <button onClick={apiCall}>Make API Call</button>
       <Button>Tomek</Button>

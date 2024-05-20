@@ -9,11 +9,7 @@ import {
   ButtonGroup,
   Popover,
 } from "@mui/material";
-import {
-  AccountCircleSharp,
-  Menu,
-  ShoppingCartSharp,
-} from "@mui/icons-material";
+import { AccountCircleSharp, ShoppingCartSharp } from "@mui/icons-material";
 
 export function Header() {
   const [anchorEl, setAnchorEl] = useState(null);
