@@ -13,6 +13,7 @@ export const MuiButton = {
         color: blue[150],
         backgroundColor: blue[50],
         boxShadow: "10px 10px 5px lightblue",
+        transitionDuration: "500ms",
       },
     },
   },
