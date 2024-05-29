@@ -7,6 +7,7 @@ import { About } from "./pages/About";
 import { GainMuscle } from "./pages/GainMuscle";
 import { GainWeight } from "./pages/GainWeight";
 import { LoseWeight } from "./pages/LoseWeight";
+import { PersonalInfo } from "./pages/PersonalInfo";
 
 const App = () => {
   // const apiCall = () => {
@@ -26,6 +27,7 @@ const App = () => {
         <Route exact path="/gainmuscle" element={<GainMuscle />} />
         <Route exact path="/gainweight" element={<GainWeight />} />
         <Route exact path="/loseweight" element={<LoseWeight />} />
+        <Route exact path="/personalinfo" element={<PersonalInfo />} />
       </Routes>
       {/* <p className="text-3xl font-bold underline"> Grypsuje...</p>
       <button onClick={apiCall}>Make API Call</button>
