@@ -1,10 +1,11 @@
 import { createPalette } from "../palette";
 const { blue } = createPalette();
-export const MuiInput = {
+export const MuiInputBase = {
   styleOverrides: {
     root: {
       backgroundColor: "white",
-      color: "black",
+      border: "1px solid",
+      borderColor: blue[100],
     },
   },
 };

@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { Header } from "../components/Header";
+import { TextInput } from "../components/TextInput";
 import {
   Box,
-  TextField,
   Select,
   FormControl,
   InputLabel,
@@ -38,17 +38,17 @@ export const PersonalInfo = () => {
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
-          height: "100vh",
+          height: "400px",
         }}
       >
         <FormControl
           sx={{
-            width: "80%",
-            maxWidth: "500px",
+            width: "500px",
             padding: "20px",
             border: "1px solid #ccc",
             borderRadius: "8px",
             boxShadow: "0px 0px 10px rgba(0, 0, 0, 10)",
+            backgroundColor: "white",
           }}
         >
           <Box
@@ -72,24 +72,9 @@ export const PersonalInfo = () => {
                 <MenuItem value={20}>Kobieta</MenuItem>
               </Select>
             </Box>
-            <TextField
-              id="outlined-basic"
-              label="Wiek"
-              variant="outlined"
-              fullWidth
-            />
-            <TextField
-              id="outlined-basic"
-              label="Wzrost"
-              variant="outlined"
-              fullWidth
-            />
-            <TextField
-              id="outlined-basic"
-              label="Waga"
-              variant="outlined"
-              fullWidth
-            />
+            <TextInput inputName={"Dupa"} />
+            <TextInput inputName={"test"} />
+            <TextInput inputName={"test"} />
           </Box>
         </FormControl>
       </Box>

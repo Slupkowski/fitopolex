@@ -2,7 +2,8 @@ import { Header } from "../components/Header";
 import ImageSlider from "../components/ImageSlider";
 import { Box, Typography } from "@mui/material";
 import { createPalette } from "../theme/palette";
-import { Input } from "../components/Input";
+import { TextInput } from "../components/TextInput";
+import { Radio } from "../components/Radio";
 import img1 from "../images/image-1.jpg";
 import img2 from "../images/image-2.jpg";
 import img3 from "../images/image-3.jpg";
@@ -40,7 +41,8 @@ export const Welcome = () => {
           margin: "0 auto",
         }}
       >
-        <Input inputName={"test"} />
+        <Radio inputName={"kutas"} />
+        <TextInput inputName={"test"} />
         <Typography variant="body1">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam tempus
           massa metus, vitae interdum dui tincidunt at. Nunc vitae libero non
