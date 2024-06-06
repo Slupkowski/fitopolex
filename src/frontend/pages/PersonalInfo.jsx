@@ -9,14 +9,17 @@ import {
   MenuItem,
   Typography,
 } from "@mui/material";
+import { createPalette } from "../theme/palette";
+const { blue, neutral } = createPalette();
 
 export const PersonalInfo = () => {
-  const [sex, setSex] = useState("");
+  const [gender, setGender] = useState("");
+  const [inputValue, setInputValue] = useState("");
 
   const handleChange = (event) => {
-    setSex(event.target.value);
+    setGender(event.target.value);
   };
-
+  console.log(inputValue);
   return (
     <div>
       <Header />
@@ -30,7 +33,7 @@ export const PersonalInfo = () => {
             margin: "0 auto",
           }}
         >
-          WPROWADŹ SWOJE PARAMETRY
+          WPROWADŹ SWOJE DANE
         </Typography>
       </Box>
       <Box
@@ -38,7 +41,7 @@ export const PersonalInfo = () => {
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
-          height: "400px",
+          height: "600px",
         }}
       >
         <FormControl
@@ -48,7 +51,7 @@ export const PersonalInfo = () => {
             border: "1px solid #ccc",
             borderRadius: "8px",
             boxShadow: "0px 0px 10px rgba(0, 0, 0, 10)",
-            backgroundColor: "white",
+            backgroundColor: neutral[100],
           }}
         >
           <Box
@@ -63,7 +66,7 @@ export const PersonalInfo = () => {
               <Select
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
-                value={sex}
+                value={gender}
                 label="Płeć"
                 onChange={handleChange}
                 fullWidth
@@ -72,9 +75,18 @@ export const PersonalInfo = () => {
                 <MenuItem value={20}>Kobieta</MenuItem>
               </Select>
             </Box>
-            <TextInput inputName={"Dupa"} />
-            <TextInput inputName={"test"} />
-            <TextInput inputName={"test"} />
+            <TextInput
+              label="label"
+              tooltipText="tooltipText"
+              value={inputValue}
+              errorMessage="errorMessage"
+              isRequired={true}
+              onChange={setInputValue}
+              // unit="kg"
+              // type="number"
+            />
+            {/* <TextInput label={"test"} tooltipText={"tooltipText1"} />
+            <TextInput label={"test"} tooltipText={"tooltipText2"} /> */}
           </Box>
         </FormControl>
       </Box>
