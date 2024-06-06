@@ -9,6 +9,7 @@ import {
   MenuItem,
   Typography,
 } from "@mui/material";
+import { GenderGroup } from "../components/GenderGroup";
 import { createPalette } from "../theme/palette";
 const { blue, neutral } = createPalette();
 
@@ -16,9 +17,6 @@ export const PersonalInfo = () => {
   const [gender, setGender] = useState("");
   const [inputValue, setInputValue] = useState("");
 
-  const handleChange = (event) => {
-    setGender(event.target.value);
-  };
   console.log(inputValue);
   return (
     <div>
@@ -62,7 +60,7 @@ export const PersonalInfo = () => {
             }}
           >
             <Box>
-              <InputLabel id="demo-simple-select-label">Płeć</InputLabel>
+              {/* <InputLabel id="demo-simple-select-label">Płeć</InputLabel>
               <Select
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
@@ -73,7 +71,15 @@ export const PersonalInfo = () => {
               >
                 <MenuItem value={10}>Mężczyzna</MenuItem>
                 <MenuItem value={20}>Kobieta</MenuItem>
-              </Select>
+              </Select> */}
+              <GenderGroup
+                label="label"
+                isRequired={true}
+                value={gender}
+                onClick={setGender}
+                errorMessage="Wybierz mądrze"
+                tooltipText={"tooltip"}
+              />
             </Box>
             <TextInput
               label="label"
@@ -85,8 +91,8 @@ export const PersonalInfo = () => {
               // unit="kg"
               // type="number"
             />
-            {/* <TextInput label={"test"} tooltipText={"tooltipText1"} />
-            <TextInput label={"test"} tooltipText={"tooltipText2"} /> */}
+            <TextInput label={"test"} tooltipText={"tooltipText1"} />
+            <TextInput label={"test"} tooltipText={"tooltipText2"} />
           </Box>
         </FormControl>
       </Box>

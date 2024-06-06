@@ -8,6 +8,7 @@ import img1 from "../images/image-1.jpg";
 import img2 from "../images/image-2.jpg";
 import img3 from "../images/image-3.jpg";
 import img4 from "../images/image-4.jpg";
+import { GenderGroup } from "../components/GenderGroup";
 
 const { blue } = createPalette();
 
@@ -41,6 +42,7 @@ export const Welcome = () => {
           margin: "0 auto",
         }}
       >
+        <GenderGroup />
         <Radio inputName={"kutas"} />
         <TextInput inputName={"test"} />
         <Typography variant="body1">
