@@ -40,23 +40,30 @@ export const GenderGroup = ({
       <Box sx={{ display: "flex", alignItems: "center" }}>
         <IconButton
           onClick={() => handleClick("female")}
-          sx={{ color: value == "female" ? teal[300] : neutral[800] }}
+          sx={{ color: value == "female" ? blue[150] : neutral[800] }}
           disableRipple
         >
           <Woman2Outlined
             sx={{
               fontSize: "40px",
+
+              "&:hover": {
+                color: value == "female" ? blue[200] : neutral[600],
+              },
             }}
           />
         </IconButton>
         <IconButton
           onClick={() => handleClick("male")}
-          sx={{ color: value == "male" ? teal[300] : neutral[800] }}
+          sx={{ color: value == "male" ? blue[150] : neutral[800] }}
           disableRipple
         >
           <ManOutlined
             sx={{
               fontSize: "40px",
+              "&:hover": {
+                color: value == "male" ? blue[200] : neutral[600],
+              },
             }}
           />
         </IconButton>

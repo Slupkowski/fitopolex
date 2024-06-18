@@ -42,9 +42,6 @@ export const Welcome = () => {
           margin: "0 auto",
         }}
       >
-        <GenderGroup />
-        <Radio inputName={"kutas"} />
-        <TextInput inputName={"test"} />
         <Typography variant="body1">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam tempus
           massa metus, vitae interdum dui tincidunt at. Nunc vitae libero non

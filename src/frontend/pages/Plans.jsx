@@ -43,6 +43,19 @@ export const Plans = () => {
         }}
       >
         <Plan
+          title="Plan dla osoby początkującej"
+          description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam
+            tempus massa metus, vitae interdum dui tincidunt at. Nunc vitae
+            libero non est dictum malesuada vel ac dolor. Mauris mauris massa,
+            blandit sit amet metus eget, pulvinar elementum mi. Sed id massa non
+            lorem feugiat tempus. Donec volutpat sed mauris quis maximus. Duis
+            sodales porta pulvinar. Etiam ut luctus urna. Nulla ultrices egestas
+            dolor sit amet faucibus."
+          buttonText="Generuj plan"
+          onClick={() => handleClickPersonalInfo()}
+        />
+        <Plan
+          title="Spersonalizowany plan + dieta"
           description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam
             tempus massa metus, vitae interdum dui tincidunt at. Nunc vitae
             libero non est dictum malesuada vel ac dolor. Mauris mauris massa,
@@ -54,17 +67,7 @@ export const Plans = () => {
           onClick={() => handleClickPersonalInfo()}
         />
         <Plan
-          description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam
-            tempus massa metus, vitae interdum dui tincidunt at. Nunc vitae
-            libero non est dictum malesuada vel ac dolor. Mauris mauris massa,
-            blandit sit amet metus eget, pulvinar elementum mi. Sed id massa non
-            lorem feugiat tempus. Donec volutpat sed mauris quis maximus. Duis
-            sodales porta pulvinar. Etiam ut luctus urna. Nulla ultrices egestas
-            dolor sit amet faucibus."
-          buttonText="Kup Teraz"
-          onClick={() => handleClickPersonalInfo()}
-        />
-        <Plan
+          title="Prowadzenie przez 6 tygodni przez trenera"
           description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam
             tempus massa metus, vitae interdum dui tincidunt at. Nunc vitae
             libero non est dictum malesuada vel ac dolor. Mauris mauris massa,

@@ -1,6 +1,6 @@
 import { Box, Typography, Button } from "@mui/material";
 
-export const Plan = ({ description, buttonText, onClick }) => {
+export const Plan = ({ description, buttonText, onClick, title }) => {
   return (
     <Box
       sx={{
@@ -17,7 +17,18 @@ export const Plan = ({ description, buttonText, onClick }) => {
         },
       }}
     >
-      <Typography sx={{ padding: "16px" }}>{description}</Typography>
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          margin: "10px",
+        }}
+      >
+        <Typography sx={{ fontWeight: "600" }}>{title}</Typography>
+
+        <Typography sx={{ padding: "16px" }}>{description}</Typography>
+      </Box>
       <Box
         sx={{
           display: "flex",

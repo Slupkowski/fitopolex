@@ -1,39 +1,28 @@
 import { useState } from "react";
 import { Header } from "../components/Header";
 import { TextInput } from "../components/TextInput";
-import {
-  Box,
-  Select,
-  FormControl,
-  InputLabel,
-  MenuItem,
-  Typography,
-} from "@mui/material";
+import { NextButton } from "../components/NextButton";
+import { Box, FormControl, Typography } from "@mui/material";
 import { GenderGroup } from "../components/GenderGroup";
 import { createPalette } from "../theme/palette";
+import { useNavigate } from "react-router-dom";
 const { blue, neutral } = createPalette();
 
 export const PersonalInfo = () => {
+  const navigate = useNavigate();
+  const handleClickTrainingInfo = () => {
+    navigate("/trainingInfo");
+  };
   const [gender, setGender] = useState("");
-  const [inputValue, setInputValue] = useState("");
+  const [ageValue, setAgeValue] = useState("");
+  const [heightValue, setHeightValue] = useState("");
+  const [weightValue, setWeightValue] = useState("");
 
-  console.log(inputValue);
   return (
     <div>
       <Header />
       <Box sx={{ marginTop: "110px" }} />
-      <Box>
-        <Typography
-          variant="h4"
-          sx={{
-            display: "flex",
-            justifyContent: "center",
-            margin: "0 auto",
-          }}
-        >
-          WPROWADŹ SWOJE DANE
-        </Typography>
-      </Box>
+
       <Box
         sx={{
           display: "flex",
@@ -52,6 +41,17 @@ export const PersonalInfo = () => {
             backgroundColor: neutral[100],
           }}
         >
+          <Box>
+            <Typography
+              variant="h6"
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+              }}
+            >
+              Wypełnij formularz
+            </Typography>
+          </Box>
           <Box
             sx={{
               display: "flex",
@@ -60,39 +60,57 @@ export const PersonalInfo = () => {
             }}
           >
             <Box>
-              {/* <InputLabel id="demo-simple-select-label">Płeć</InputLabel>
-              <Select
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                value={gender}
-                label="Płeć"
-                onChange={handleChange}
-                fullWidth
-              >
-                <MenuItem value={10}>Mężczyzna</MenuItem>
-                <MenuItem value={20}>Kobieta</MenuItem>
-              </Select> */}
               <GenderGroup
-                label="label"
+                label="Płeć"
                 isRequired={true}
                 value={gender}
                 onClick={setGender}
-                errorMessage="Wybierz mądrze"
-                tooltipText={"tooltip"}
+                tooltipText={
+                  "Potrzebujemy znać twoją płeć żeby móc skalibrować odpowiedni trening do twoich predyspozycji"
+                }
               />
             </Box>
             <TextInput
-              label="label"
+              label="Wiek"
               tooltipText="tooltipText"
-              value={inputValue}
-              errorMessage="errorMessage"
+              value={ageValue}
+              // errorMessage="errorMessage"
+              type="number"
               isRequired={true}
-              onChange={setInputValue}
-              // unit="kg"
-              // type="number"
+              onChange={setAgeValue}
             />
-            <TextInput label={"test"} tooltipText={"tooltipText1"} />
-            <TextInput label={"test"} tooltipText={"tooltipText2"} />
+            <TextInput
+              label={"Wzrost"}
+              tooltipText="tooltipText"
+              value={heightValue}
+              // errorMessage="errorMessage"
+              type="number"
+              isRequired={true}
+              onChange={setHeightValue}
+              unit="cm"
+            />
+            <TextInput
+              label={"Waga"}
+              value={weightValue}
+              errorMessage="Uzupełnij dane"
+              type="number"
+              isRequired={true}
+              onChange={setWeightValue}
+              unit="kg"
+              tooltipText="toooltipText"
+            />
+          </Box>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "row-reverse",
+              margin: "10px",
+            }}
+          >
+            <NextButton
+              buttonName="Dalej"
+              onClick={() => handleClickTrainingInfo()}
+            />
           </Box>
         </FormControl>
       </Box>
