@@ -10,14 +10,46 @@ import { useNavigate } from "react-router-dom";
 const { blue, neutral } = createPalette();
 
 export const TrainingInfo = () => {
+  const [timeInfoIndex, setTimeInfoIndex] = useState(0);
   const [equipmentInfoIndex, setEquipmentInfoIndex] = useState(0);
+  const [goalInfoIndex, setGoalInfoIndex] = useState(0);
+  const [extraGoalInfoIndex, setExtraGoalInfoIndex] = useState(0);
+  const [checkboxState, setCheckboxState] = useState([
+    false,
+    false,
+    false,
+    false,
+  ]);
   const navigate = useNavigate();
   const handleClickContactInfo = () => {
     navigate("/contactInfo");
   };
-
+  const handleClickPersonalInfo = () => {
+    navigate("/personalinfo");
+  };
+  const onChangeTime = (index) => {
+    setTimeInfoIndex(index);
+  };
   const onChangeEquipment = (index) => {
     setEquipmentInfoIndex(index);
+  };
+  const onChangeGoal = (index) => {
+    setGoalInfoIndex(index);
+  };
+  const onChangeExtraGoal = (index) => {
+    setExtraGoalInfoIndex(index);
+  };
+  const handleCheckboxChange = (index) => {
+    setCheckboxState((prevState) => {
+      const newState = [...prevState];
+      if (index === 3) {
+        return [false, false, false, true];
+      } else {
+        newState[index] = !newState[index];
+        newState[3] = false;
+        return newState;
+      }
+    });
   };
 
   return (
@@ -64,11 +96,15 @@ export const TrainingInfo = () => {
             <Radio
               inputName={"Który przedział czasowy ci odpowiada?"}
               options={[
-                { label: "Co drugi dzień 2 godziny" },
-                { label: "Godzina codziennie" },
-                { label: "Obojętnie" },
+                {
+                  label: "Co drugi dzień 2 godziny",
+                  checked: timeInfoIndex == 0,
+                },
+                { label: "Godzina codziennie", checked: timeInfoIndex == 1 },
+                { label: "Obojętnie", checked: timeInfoIndex == 2 },
               ]}
               isRequired={true}
+              onChange={(index) => onChangeTime(index)}
             />
             <Radio
               inputName={"Twój dostępny sprzęt do ćwiczeń"}
@@ -92,35 +128,65 @@ export const TrainingInfo = () => {
             {equipmentInfoIndex == 2 && (
               <Box>
                 <Checkbox
+                  inputName={"Co masz w domu?"}
                   options={[
                     {
                       label: "Mam drążek do podciągania",
+                      checked: checkboxState[0],
                     },
                     {
                       label: "Mam hantle",
+                      checked: checkboxState[1],
                     },
                     {
-                      label: "Kurwa nie mam nic",
+                      label: "Mam zestaw gum oporowych",
+                      checked: checkboxState[2],
+                    },
+                    {
+                      label: "Nie mam żadnego sprzętu",
+                      checked: checkboxState[3],
                     },
                   ]}
+                  onChange={handleCheckboxChange}
                 />
               </Box>
             )}
             <Radio
-              inputName={"Co jest twoim celem?"}
+              inputName={"Co jest twoim głównym celem?"}
               options={[
-                { label: "Chcę schudnąć" },
-                { label: "Chcę zbudować mięśnie" },
-                { label: "sieg heil kurwy " },
+                { label: "Chcę schudnąć", checked: goalInfoIndex == 0 },
+
+                {
+                  label: "Chcę zbudować mięśnie",
+                  checked: goalInfoIndex == 1,
+                },
+                {
+                  label: "Chcę schudnąć i zbudować mięśnie",
+                  checked: goalInfoIndex == 2,
+                },
               ]}
               isRequired={true}
+              onChange={(index) => onChangeGoal(index)}
             />
-            <TextInput
-              label="Coś tam jeszcze wymyśle"
-              tooltipText="tooltipText"
-              // errorMessage="errorMessage"
-              type="number"
+            <Radio
+              inputName={"Twoje dodatkowe cele"}
+              options={[
+                {
+                  label: "Chce być silniejszy",
+                  checked: extraGoalInfoIndex == 0,
+                },
+
+                {
+                  label: "Chce mieć lepszą kondycję",
+                  checked: extraGoalInfoIndex == 1,
+                },
+                {
+                  label: "Chce być silniejszy i mieć lepszą kondycję",
+                  checked: extraGoalInfoIndex == 2,
+                },
+              ]}
               isRequired={true}
+              onChange={(index) => onChangeExtraGoal(index)}
             />
           </Box>
           <Box
@@ -133,7 +199,7 @@ export const TrainingInfo = () => {
           >
             <NextButton
               buttonName="Powrót"
-              onClick={() => handleClickContactInfo()}
+              onClick={() => handleClickPersonalInfo()}
             />
             <NextButton
               buttonName="Dalej"

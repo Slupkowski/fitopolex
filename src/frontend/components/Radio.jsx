@@ -1,15 +1,6 @@
 import { Radio } from "@mui/material";
 import { Typography, Box } from "@mui/material";
 import { createPalette } from "../theme/palette";
-
-// options:[
-// {
-//   label: "xx",
-//   checked: true,
-
-// }
-// ]
-
 export const Radio = ({ inputName, options, onChange, isRequired = false }) => {
   const { blue, neutral, teal } = createPalette();
   return (
