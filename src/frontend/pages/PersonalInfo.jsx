@@ -11,24 +11,58 @@ const { blue, neutral } = createPalette();
 export const PersonalInfo = () => {
   const navigate = useNavigate();
   const handleClickTrainingInfo = () => {
-    navigate("/trainingInfo");
+    if (validateInputs()) {
+      navigate("/trainingInfo");
+    }
   };
+
   const [gender, setGender] = useState("");
   const [ageValue, setAgeValue] = useState("");
   const [heightValue, setHeightValue] = useState("");
   const [weightValue, setWeightValue] = useState("");
 
+  const [ageError, setAgeError] = useState(false);
+  const [heightError, setHeightError] = useState(false);
+  const [weightError, setWeightError] = useState(false);
+
+  const validateInputs = () => {
+    let isValid = true;
+
+    if (ageValue === "") {
+      setAgeError(true);
+      isValid = false;
+    } else {
+      setAgeError(false);
+    }
+
+    if (heightValue === "") {
+      setHeightError(true);
+      isValid = false;
+    } else {
+      setHeightError(false);
+    }
+
+    if (weightValue === "") {
+      setWeightError(true);
+      isValid = false;
+    } else {
+      setWeightError(false);
+    }
+
+    return isValid;
+  };
+
   return (
     <div>
       <Header />
-      <Box sx={{ marginTop: "110px" }} />
+      <Box sx={{ marginTop: "150px" }} />
 
       <Box
         sx={{
           display: "flex",
           justifyContent: "center",
-          alignItems: "center",
-          height: "600px",
+          alignItems: "flex-start",
+          minHeight: "600px",
         }}
       >
         <FormControl
@@ -39,6 +73,7 @@ export const PersonalInfo = () => {
             borderRadius: "8px",
             boxShadow: "0px 0px 10px rgba(0, 0, 0, 10)",
             backgroundColor: neutral[100],
+            marginBottom: "45px",
           }}
         >
           <Box>
@@ -66,38 +101,38 @@ export const PersonalInfo = () => {
                 value={gender}
                 onClick={setGender}
                 tooltipText={
-                  "Potrzebujemy znać twoją płeć żeby móc skalibrować odpowiedni trening do twoich predyspozycji"
+                  "Potrzebujemy informacji na temat twojej płci żeby móc skalibrować odpowiedni trening do twoich predyspozycji"
                 }
               />
             </Box>
             <TextInput
               label="Wiek"
-              tooltipText="tooltipText"
+              tooltipText="Potrzebujemy informacji na temat twojego wieku żeby móc skalibrować odpowiedni trening do twoich predyspozycji"
               value={ageValue}
-              // errorMessage="errorMessage"
               type="number"
               isRequired={true}
               onChange={setAgeValue}
+              errorMessage={ageError ? "Uzupełnij dane" : ""}
             />
             <TextInput
               label={"Wzrost"}
-              tooltipText="tooltipText"
+              tooltipText="Potrzebujemy informacji na temat twojego wzrostu żeby móc skalibrować odpowiedni trening do twoich predyspozycji"
               value={heightValue}
-              // errorMessage="errorMessage"
               type="number"
               isRequired={true}
               onChange={setHeightValue}
               unit="cm"
+              errorMessage={heightError ? "Uzupełnij dane" : ""}
             />
             <TextInput
               label={"Waga"}
               value={weightValue}
-              errorMessage="Uzupełnij dane"
               type="number"
               isRequired={true}
               onChange={setWeightValue}
               unit="kg"
-              tooltipText="toooltipText"
+              tooltipText="Potrzebujemy informacji na temat twojej wagi żeby móc skalibrować odpowiedni trening do twoich predyspozycji"
+              errorMessage={weightError ? "Uzupełnij dane" : ""}
             />
           </Box>
           <Box
