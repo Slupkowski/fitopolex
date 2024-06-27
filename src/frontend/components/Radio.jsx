@@ -1,7 +1,14 @@
 import { Radio } from "@mui/material";
-import { Typography, Box } from "@mui/material";
+import { Typography, Box, Tooltip } from "@mui/material";
+import { InfoOutlined } from "@mui/icons-material";
 import { createPalette } from "../theme/palette";
-export const Radio = ({ inputName, options, onChange, isRequired = false }) => {
+export const Radio = ({
+  inputName,
+  options,
+  onChange,
+  tooltipText,
+  isRequired = false,
+}) => {
   const { blue, neutral, teal } = createPalette();
   return (
     <Box>
@@ -16,6 +23,9 @@ export const Radio = ({ inputName, options, onChange, isRequired = false }) => {
           {inputName}
           {isRequired ? <span style={{ color: "red" }}> *</span> : null}
         </Typography>
+        <Tooltip title={tooltipText} placement="right" arrow>
+          <InfoOutlined sx={{ color: neutral[800] }} />
+        </Tooltip>
       </Box>
       <Box>
         {options &&

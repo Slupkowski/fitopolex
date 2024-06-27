@@ -34,13 +34,15 @@ export const Checkbox = ({
                 marginLeft: "15px",
               }}
             >
-              <Typography sx={{ fontSize: "14px" }}>{option.label}</Typography>
-              <Checkbox
-                key={index}
-                checked={option.checked}
-                size="small"
-                onChange={() => onChange(index)}
-              />
+              <Typography sx={{ fontSize: "14px" }}>
+                {option.label}
+                <Checkbox
+                  key={index}
+                  checked={option.checked}
+                  size="small"
+                  onChange={() => onChange(index)}
+                />
+              </Typography>
             </Box>
           ))}
       </Box>

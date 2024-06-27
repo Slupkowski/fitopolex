@@ -2,7 +2,6 @@ import { useState } from "react";
 import { Header } from "../components/Header";
 import { Radio } from "../components/Radio";
 import { Checkbox } from "../components/CheckBox";
-import { TextInput } from "../components/TextInput";
 import { NextButton } from "../components/NextButton";
 import { Box, FormControl, Typography } from "@mui/material";
 import { createPalette } from "../theme/palette";
@@ -21,24 +20,31 @@ export const TrainingInfo = () => {
     false,
   ]);
   const navigate = useNavigate();
+
   const handleClickContactInfo = () => {
     navigate("/contactInfo");
   };
+
   const handleClickPersonalInfo = () => {
     navigate("/personalinfo");
   };
+
   const onChangeTime = (index) => {
     setTimeInfoIndex(index);
   };
+
   const onChangeEquipment = (index) => {
     setEquipmentInfoIndex(index);
   };
+
   const onChangeGoal = (index) => {
     setGoalInfoIndex(index);
   };
+
   const onChangeExtraGoal = (index) => {
     setExtraGoalInfoIndex(index);
   };
+
   const handleCheckboxChange = (index) => {
     setCheckboxState((prevState) => {
       const newState = [...prevState];
@@ -61,8 +67,8 @@ export const TrainingInfo = () => {
         sx={{
           display: "flex",
           justifyContent: "center",
-          alignItems: "center",
-          height: "600px",
+          alignItems: "flex-start",
+          minHeight: "600px",
         }}
       >
         <FormControl
@@ -71,8 +77,9 @@ export const TrainingInfo = () => {
             padding: "20px",
             border: "1px solid #ccc",
             borderRadius: "8px",
-            boxShadow: "0px 0px 10px rgba(0, 0, 0, 10)",
+            boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.1)",
             backgroundColor: neutral[100],
+            marginBottom: "45px",
           }}
         >
           <Box>
@@ -95,40 +102,49 @@ export const TrainingInfo = () => {
           >
             <Radio
               inputName={"Który przedział czasowy ci odpowiada?"}
+              tooltipText={
+                "Potrzebujemy tych informacji żeby skalibrować odpowiedni trening do twoich predyspozycji "
+              }
               options={[
                 {
                   label: "Co drugi dzień 2 godziny",
-                  checked: timeInfoIndex == 0,
+                  checked: timeInfoIndex === 0,
                 },
-                { label: "Godzina codziennie", checked: timeInfoIndex == 1 },
-                { label: "Obojętnie", checked: timeInfoIndex == 2 },
+                { label: "Godzina codziennie", checked: timeInfoIndex === 1 },
+                { label: "Obojętnie", checked: timeInfoIndex === 2 },
               ]}
               isRequired={true}
               onChange={(index) => onChangeTime(index)}
             />
             <Radio
               inputName={"Twój dostępny sprzęt do ćwiczeń"}
+              tooltipText={
+                "Potrzebujemy tych informacji żeby skalibrować odpowiedni trening do twoich predyspozycji "
+              }
               options={[
                 {
                   label: "Mogę chodzić na siłownie",
-                  checked: equipmentInfoIndex == 0,
+                  checked: equipmentInfoIndex === 0,
                 },
                 {
                   label: "Mogę trenować w parku",
-                  checked: equipmentInfoIndex == 1,
+                  checked: equipmentInfoIndex === 1,
                 },
                 {
                   label: "Mogę trenować tylko w domu",
-                  checked: equipmentInfoIndex == 2,
+                  checked: equipmentInfoIndex === 2,
                 },
               ]}
               isRequired={true}
               onChange={(index) => onChangeEquipment(index)}
             />
-            {equipmentInfoIndex == 2 && (
+            {equipmentInfoIndex === 2 && (
               <Box>
                 <Checkbox
                   inputName={"Co masz w domu?"}
+                  tooltipText={
+                    "Potrzebujemy tych informacji żeby skalibrować odpowiedni trening do twoich predyspozycji "
+                  }
                   options={[
                     {
                       label: "Mam drążek do podciągania",
@@ -153,16 +169,18 @@ export const TrainingInfo = () => {
             )}
             <Radio
               inputName={"Co jest twoim głównym celem?"}
+              tooltipText={
+                "Potrzebujemy tych informacji żeby skalibrować odpowiedni trening do twoich predyspozycji "
+              }
               options={[
-                { label: "Chcę schudnąć", checked: goalInfoIndex == 0 },
-
+                { label: "Chcę schudnąć", checked: goalInfoIndex === 0 },
                 {
                   label: "Chcę zbudować mięśnie",
-                  checked: goalInfoIndex == 1,
+                  checked: goalInfoIndex === 1,
                 },
                 {
                   label: "Chcę schudnąć i zbudować mięśnie",
-                  checked: goalInfoIndex == 2,
+                  checked: goalInfoIndex === 2,
                 },
               ]}
               isRequired={true}
@@ -170,19 +188,21 @@ export const TrainingInfo = () => {
             />
             <Radio
               inputName={"Twoje dodatkowe cele"}
+              tooltipText={
+                "Potrzebujemy tych informacji żeby skalibrować odpowiedni trening do twoich predyspozycji "
+              }
               options={[
                 {
-                  label: "Chce być silniejszy",
-                  checked: extraGoalInfoIndex == 0,
-                },
-
-                {
-                  label: "Chce mieć lepszą kondycję",
-                  checked: extraGoalInfoIndex == 1,
+                  label: "Chcę być silniejszy",
+                  checked: extraGoalInfoIndex === 0,
                 },
                 {
-                  label: "Chce być silniejszy i mieć lepszą kondycję",
-                  checked: extraGoalInfoIndex == 2,
+                  label: "Chcę mieć lepszą kondycję",
+                  checked: extraGoalInfoIndex === 1,
+                },
+                {
+                  label: "Chcę być silniejszy i mieć lepszą kondycję",
+                  checked: extraGoalInfoIndex === 2,
                 },
               ]}
               isRequired={true}
@@ -197,14 +217,8 @@ export const TrainingInfo = () => {
               justifyContent: "space-between",
             }}
           >
-            <NextButton
-              buttonName="Powrót"
-              onClick={() => handleClickPersonalInfo()}
-            />
-            <NextButton
-              buttonName="Dalej"
-              onClick={() => handleClickContactInfo()}
-            />
+            <NextButton buttonName="Powrót" onClick={handleClickPersonalInfo} />
+            <NextButton buttonName="Dalej" onClick={handleClickContactInfo} />
           </Box>
         </FormControl>
       </Box>
