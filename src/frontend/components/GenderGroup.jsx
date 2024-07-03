@@ -14,7 +14,7 @@ export const GenderGroup = ({
   errorMessage = "",
   tooltipText = "",
 }) => {
-  const { blue, neutral, teal } = createPalette();
+  const { blue, neutral } = createPalette();
   const handleClick = (newValue) => {
     onClick(newValue);
   };
