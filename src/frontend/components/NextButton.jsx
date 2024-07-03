@@ -1,10 +1,11 @@
 import { Button, Box } from "@mui/material";
 import { createPalette } from "../theme/palette";
-export const NextButton = ({ buttonName, onClick }) => {
+export const NextButton = ({ buttonName, onClick, type = "button" }) => {
   const { blue, neutral, teal } = createPalette();
   return (
     <Button
       onClick={onClick}
+      type={type}
       sx={{
         backgroundColor: blue[150],
         color: blue[50],

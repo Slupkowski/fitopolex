@@ -31,6 +31,7 @@ export const Radio = ({
         {options &&
           options.map((option, index) => (
             <Box
+              key={index}
               sx={{
                 display: "flex",
                 alignItems: "center",

@@ -1,56 +1,26 @@
-import { useState } from "react";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { Header } from "../components/Header";
-import { TextInput } from "../components/TextInput";
 import { NextButton } from "../components/NextButton";
 import { Box, FormControl, Typography } from "@mui/material";
-import { GenderGroup } from "../components/GenderGroup";
 import { createPalette } from "../theme/palette";
 import { useNavigate } from "react-router-dom";
+import { ControllerInputField } from "../components/controlled/ControllerInputField";
+import { ControllerGenderGroup } from "../components/controlled/ControllerGenderGroup.jsx";
+import { useForm } from "react-hook-form";
+import { personalInfoSchema } from "../utils/schema.js";
 const { blue, neutral } = createPalette();
 
 export const PersonalInfo = () => {
+  const { control, handleSubmit, setValue, formState } = useForm({
+    resolver: zodResolver(personalInfoSchema),
+  });
+
+  const onSubmit = (values) => {
+    console.log(values);
+    navigate("/trainingInfo");
+  };
   const navigate = useNavigate();
-  const handleClickTrainingInfo = () => {
-    if (validateInputs()) {
-      navigate("/trainingInfo");
-    }
-  };
-
-  const [gender, setGender] = useState("");
-  const [ageValue, setAgeValue] = useState("");
-  const [heightValue, setHeightValue] = useState("");
-  const [weightValue, setWeightValue] = useState("");
-
-  const [ageError, setAgeError] = useState(false);
-  const [heightError, setHeightError] = useState(false);
-  const [weightError, setWeightError] = useState(false);
-
-  const validateInputs = () => {
-    let isValid = true;
-
-    if (ageValue === "") {
-      setAgeError(true);
-      isValid = false;
-    } else {
-      setAgeError(false);
-    }
-
-    if (heightValue === "") {
-      setHeightError(true);
-      isValid = false;
-    } else {
-      setHeightError(false);
-    }
-
-    if (weightValue === "") {
-      setWeightError(true);
-      isValid = false;
-    } else {
-      setWeightError(false);
-    }
-
-    return isValid;
-  };
+  console.log(formState);
 
   return (
     <div>
@@ -65,89 +35,87 @@ export const PersonalInfo = () => {
           minHeight: "600px",
         }}
       >
-        <FormControl
-          sx={{
-            width: "500px",
-            padding: "20px",
-            border: "1px solid #ccc",
-            borderRadius: "8px",
-            boxShadow: "0px 0px 10px rgba(0, 0, 0, 10)",
-            backgroundColor: neutral[100],
-            marginBottom: "45px",
-          }}
-        >
-          <Box>
-            <Typography
-              variant="h6"
-              sx={{
-                display: "flex",
-                justifyContent: "center",
-              }}
-            >
-              Wypełnij formularz
-            </Typography>
-          </Box>
-          <Box
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <FormControl
             sx={{
-              display: "flex",
-              flexDirection: "column",
-              gap: "20px",
+              width: "500px",
+              padding: "20px",
+              border: "1px solid #ccc",
+              borderRadius: "8px",
+              boxShadow: "0px 0px 10px rgba(0, 0, 0, 10)",
+              backgroundColor: neutral[100],
+              marginBottom: "45px",
             }}
           >
             <Box>
-              <GenderGroup
-                label="Płeć"
+              <Typography
+                variant="h6"
+                sx={{
+                  display: "flex",
+                  justifyContent: "center",
+                }}
+              >
+                Wypełnij formularz
+              </Typography>
+            </Box>
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                gap: "20px",
+              }}
+            >
+              <Box>
+                <ControllerGenderGroup
+                  label="Płeć"
+                  isRequired={true}
+                  tooltipText={
+                    "Potrzebujemy informacji na temat twojej płci żeby móc skalibrować odpowiedni trening do twoich predyspozycji"
+                  }
+                  control={control}
+                  setValue={setValue}
+                  name="gender"
+                  errorMessage={formState.errors?.gender?.message}
+                />
+              </Box>
+              <ControllerInputField
+                label="Wiek"
+                tooltipText="Potrzebujemy informacji na temat twojego wieku żeby móc skalibrować odpowiedni trening do twoich predyspozycji"
                 isRequired={true}
-                value={gender}
-                onClick={setGender}
-                tooltipText={
-                  "Potrzebujemy informacji na temat twojej płci żeby móc skalibrować odpowiedni trening do twoich predyspozycji"
-                }
+                type="number"
+                control={control}
+                name="age"
+              />
+              <ControllerInputField
+                label={"Wzrost"}
+                tooltipText="Potrzebujemy informacji na temat twojego wzrostu żeby móc skalibrować odpowiedni trening do twoich predyspozycji"
+                type="number"
+                control={control}
+                isRequired={true}
+                unit="cm"
+                name="height"
+              />
+              <ControllerInputField
+                label={"Waga"}
+                type="number"
+                control={control}
+                isRequired={true}
+                unit="kg"
+                tooltipText="Potrzebujemy informacji na temat twojej wagi żeby móc skalibrować odpowiedni trening do twoich predyspozycji"
+                name="weight"
               />
             </Box>
-            <TextInput
-              label="Wiek"
-              tooltipText="Potrzebujemy informacji na temat twojego wieku żeby móc skalibrować odpowiedni trening do twoich predyspozycji"
-              value={ageValue}
-              type="number"
-              isRequired={true}
-              onChange={setAgeValue}
-              errorMessage={ageError ? "Uzupełnij dane" : ""}
-            />
-            <TextInput
-              label={"Wzrost"}
-              tooltipText="Potrzebujemy informacji na temat twojego wzrostu żeby móc skalibrować odpowiedni trening do twoich predyspozycji"
-              value={heightValue}
-              type="number"
-              isRequired={true}
-              onChange={setHeightValue}
-              unit="cm"
-              errorMessage={heightError ? "Uzupełnij dane" : ""}
-            />
-            <TextInput
-              label={"Waga"}
-              value={weightValue}
-              type="number"
-              isRequired={true}
-              onChange={setWeightValue}
-              unit="kg"
-              tooltipText="Potrzebujemy informacji na temat twojej wagi żeby móc skalibrować odpowiedni trening do twoich predyspozycji"
-              errorMessage={weightError ? "Uzupełnij dane" : ""}
-            />
-          </Box>
-          <Box
-            sx={{
-              display: "flex",
-              flexDirection: "row-reverse",
-              margin: "10px",
-            }}
-          >
-            <NextButton
-              buttonName="Dalej"
-              onClick={() => handleClickTrainingInfo()}
-            />
-          </Box>
-        </FormControl>
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "row-reverse",
+                margin: "10px",
+              }}
+            >
+              <NextButton buttonName="Dalej" type="submit" />
+            </Box>
+          </FormControl>
+        </form>
       </Box>
     </div>
   );
