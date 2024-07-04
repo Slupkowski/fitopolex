@@ -9,7 +9,7 @@ export const Radio = ({
   tooltipText,
   isRequired = false,
 }) => {
-  const { blue, neutral, teal } = createPalette();
+  const { neutral } = createPalette();
   return (
     <Box>
       <Box sx={{ display: "flex", alignItems: "center", gap: "10px" }}>
