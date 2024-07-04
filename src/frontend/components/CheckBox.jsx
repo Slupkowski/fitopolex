@@ -5,10 +5,11 @@ import { createPalette } from "../theme/palette";
 export const Checkbox = ({
   inputName,
   options,
+  value,
   onChange,
   isRequired = false,
 }) => {
-  const { blue, neutral, teal } = createPalette();
+  const { neutral } = createPalette();
   return (
     <Box>
       <Box sx={{ display: "flex", alignItems: "center", gap: "10px" }}>
@@ -27,6 +28,7 @@ export const Checkbox = ({
         {options &&
           options.map((option, index) => (
             <Box
+              key={index}
               sx={{
                 display: "flex",
                 alignItems: "center",
@@ -35,10 +37,9 @@ export const Checkbox = ({
               }}
             >
               <Typography sx={{ fontSize: "14px" }}>
-                {option.label}
+                {option}
                 <Checkbox
-                  key={index}
-                  checked={option.checked}
+                  checked={value[index]}
                   size="small"
                   onChange={() => onChange(index)}
                 />
