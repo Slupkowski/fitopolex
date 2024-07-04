@@ -1,62 +1,40 @@
-import { useState } from "react";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { trainingInfoSchema } from "../utils/TrainingInfoSchema.js";
 import { Header } from "../components/Header";
-import { Radio } from "../components/Radio";
-import { Checkbox } from "../components/CheckBox";
 import { NextButton } from "../components/NextButton";
 import { Box, FormControl, Typography } from "@mui/material";
 import { createPalette } from "../theme/palette";
 import { useNavigate } from "react-router-dom";
-const { blue, neutral } = createPalette();
+import { ControlledRadio } from "../components/controlled/ControlledRadio";
+import { ControlledCheckbox } from "../components/controlled/ControlledCheckbox";
+import { useForm } from "react-hook-form";
+const { neutral } = createPalette();
 
 export const TrainingInfo = () => {
-  const [timeInfoIndex, setTimeInfoIndex] = useState(0);
-  const [equipmentInfoIndex, setEquipmentInfoIndex] = useState(0);
-  const [goalInfoIndex, setGoalInfoIndex] = useState(0);
-  const [extraGoalInfoIndex, setExtraGoalInfoIndex] = useState(0);
-  const [checkboxState, setCheckboxState] = useState([
-    false,
-    false,
-    false,
-    false,
-  ]);
+  const { watch, control, setValue, handleSubmit, formState, getValues } =
+    useForm({
+      resolver: zodResolver(trainingInfoSchema),
+    });
+  const timeInfo = watch("timeInfo");
+  const extraGoalInfo = watch("extraGoalInfo");
+  const goalInfo = watch("goalInfo");
+  const equipmentInfo = watch("equipmentInfo");
   const navigate = useNavigate();
 
-  const handleClickContactInfo = () => {
+  const onSubmit = (values) => {
+    console.log(values);
     navigate("/contactInfo");
+  };
+
+  const onInSubmit = (values) => {
+    console.log(values, formState);
   };
 
   const handleClickPersonalInfo = () => {
     navigate("/personalinfo");
   };
 
-  const onChangeTime = (index) => {
-    setTimeInfoIndex(index);
-  };
-
-  const onChangeEquipment = (index) => {
-    setEquipmentInfoIndex(index);
-  };
-
-  const onChangeGoal = (index) => {
-    setGoalInfoIndex(index);
-  };
-
-  const onChangeExtraGoal = (index) => {
-    setExtraGoalInfoIndex(index);
-  };
-
-  const handleCheckboxChange = (index) => {
-    setCheckboxState((prevState) => {
-      const newState = [...prevState];
-      if (index === 3) {
-        return [false, false, false, true];
-      } else {
-        newState[index] = !newState[index];
-        newState[3] = false;
-        return newState;
-      }
-    });
-  };
+  console.log(formState, getValues());
 
   return (
     <div>
@@ -71,156 +49,157 @@ export const TrainingInfo = () => {
           minHeight: "600px",
         }}
       >
-        <FormControl
-          sx={{
-            width: "500px",
-            padding: "20px",
-            border: "1px solid #ccc",
-            borderRadius: "8px",
-            boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.1)",
-            backgroundColor: neutral[100],
-            marginBottom: "45px",
-          }}
-        >
-          <Box>
-            <Typography
-              variant="h6"
+        <form onSubmit={handleSubmit(onSubmit, onInSubmit)}>
+          <FormControl
+            sx={{
+              width: "500px",
+              padding: "20px",
+              border: "1px solid #ccc",
+              borderRadius: "8px",
+              boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.1)",
+              backgroundColor: neutral[100],
+              marginBottom: "45px",
+            }}
+          >
+            <Box>
+              <Typography
+                variant="h6"
+                sx={{
+                  display: "flex",
+                  justifyContent: "center",
+                }}
+              >
+                Wypełnij formularz
+              </Typography>
+            </Box>
+            <Box
               sx={{
                 display: "flex",
-                justifyContent: "center",
+                flexDirection: "column",
+                gap: "20px",
               }}
             >
-              Wypełnij formularz
-            </Typography>
-          </Box>
-          <Box
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-              gap: "20px",
-            }}
-          >
-            <Radio
-              inputName={"Który przedział czasowy ci odpowiada?"}
-              tooltipText={
-                "Potrzebujemy tych informacji żeby skalibrować odpowiedni trening do twoich predyspozycji "
-              }
-              options={[
-                {
-                  label: "Co drugi dzień 2 godziny",
-                  checked: timeInfoIndex === 0,
-                },
-                { label: "Godzina codziennie", checked: timeInfoIndex === 1 },
-                { label: "Obojętnie", checked: timeInfoIndex === 2 },
-              ]}
-              isRequired={true}
-              onChange={(index) => onChangeTime(index)}
-            />
-            <Radio
-              inputName={"Twój dostępny sprzęt do ćwiczeń"}
-              tooltipText={
-                "Potrzebujemy tych informacji żeby skalibrować odpowiedni trening do twoich predyspozycji "
-              }
-              options={[
-                {
-                  label: "Mogę chodzić na siłownie",
-                  checked: equipmentInfoIndex === 0,
-                },
-                {
-                  label: "Mogę trenować w parku",
-                  checked: equipmentInfoIndex === 1,
-                },
-                {
-                  label: "Mogę trenować tylko w domu",
-                  checked: equipmentInfoIndex === 2,
-                },
-              ]}
-              isRequired={true}
-              onChange={(index) => onChangeEquipment(index)}
-            />
-            {equipmentInfoIndex === 2 && (
-              <Box>
-                <Checkbox
-                  inputName={"Co masz w domu?"}
-                  tooltipText={
-                    "Potrzebujemy tych informacji żeby skalibrować odpowiedni trening do twoich predyspozycji "
-                  }
-                  options={[
-                    {
-                      label: "Mam drążek do podciągania",
-                      checked: checkboxState[0],
-                    },
-                    {
-                      label: "Mam hantle",
-                      checked: checkboxState[1],
-                    },
-                    {
-                      label: "Mam zestaw gum oporowych",
-                      checked: checkboxState[2],
-                    },
-                    {
-                      label: "Nie mam żadnego sprzętu",
-                      checked: checkboxState[3],
-                    },
-                  ]}
-                  onChange={handleCheckboxChange}
-                />
-              </Box>
-            )}
-            <Radio
-              inputName={"Co jest twoim głównym celem?"}
-              tooltipText={
-                "Potrzebujemy tych informacji żeby skalibrować odpowiedni trening do twoich predyspozycji "
-              }
-              options={[
-                { label: "Chcę schudnąć", checked: goalInfoIndex === 0 },
-                {
-                  label: "Chcę zbudować mięśnie",
-                  checked: goalInfoIndex === 1,
-                },
-                {
-                  label: "Chcę schudnąć i zbudować mięśnie",
-                  checked: goalInfoIndex === 2,
-                },
-              ]}
-              isRequired={true}
-              onChange={(index) => onChangeGoal(index)}
-            />
-            <Radio
-              inputName={"Twoje dodatkowe cele"}
-              tooltipText={
-                "Potrzebujemy tych informacji żeby skalibrować odpowiedni trening do twoich predyspozycji "
-              }
-              options={[
-                {
-                  label: "Chcę być silniejszy",
-                  checked: extraGoalInfoIndex === 0,
-                },
-                {
-                  label: "Chcę mieć lepszą kondycję",
-                  checked: extraGoalInfoIndex === 1,
-                },
-                {
-                  label: "Chcę być silniejszy i mieć lepszą kondycję",
-                  checked: extraGoalInfoIndex === 2,
-                },
-              ]}
-              isRequired={true}
-              onChange={(index) => onChangeExtraGoal(index)}
-            />
-          </Box>
-          <Box
-            sx={{
-              display: "flex",
-              flexDirection: "row",
-              marginTop: "20px",
-              justifyContent: "space-between",
-            }}
-          >
-            <NextButton buttonName="Powrót" onClick={handleClickPersonalInfo} />
-            <NextButton buttonName="Dalej" onClick={handleClickContactInfo} />
-          </Box>
-        </FormControl>
+              <ControlledRadio
+                inputName={"Który przedział czasowy ci odpowiada?"}
+                tooltipText={
+                  "Potrzebujemy tych informacji żeby skalibrować odpowiedni trening do twoich predyspozycji "
+                }
+                name="timeInfo"
+                options={[
+                  {
+                    label: "Co drugi dzień 2 godziny",
+                    checked: timeInfo === 0,
+                  },
+                  { label: "Godzina codziennie", checked: timeInfo === 1 },
+                  { label: "Obojętnie", checked: timeInfo === 2 },
+                ]}
+                isRequired={true}
+                control={control}
+                setValue={setValue}
+              />
+              <ControlledRadio
+                inputName={"Twój dostępny sprzęt do ćwiczeń"}
+                tooltipText={
+                  "Potrzebujemy tych informacji żeby skalibrować odpowiedni trening do twoich predyspozycji "
+                }
+                name="equipmentInfo"
+                options={[
+                  {
+                    label: "Mogę chodzić na siłownie",
+                    checked: equipmentInfo === 0,
+                  },
+                  {
+                    label: "Mogę trenować w parku",
+                    checked: equipmentInfo === 1,
+                  },
+                  {
+                    label: "Mogę trenować tylko w domu",
+                    checked: equipmentInfo === 2,
+                  },
+                ]}
+                setValue={setValue}
+                isRequired={true}
+                control={control}
+              />
+              {equipmentInfo === 2 && (
+                <Box>
+                  <ControlledCheckbox
+                    inputName={"Co masz w domu?"}
+                    name="houseEquipment"
+                    control={control}
+                    setValue={setValue}
+                    options={[
+                      "Mam drążek do podciągania",
+                      "Mam hantle",
+                      "Mam zestaw gum oporowych",
+                      "Nie mam żadnego sprzętu",
+                    ]}
+                    watch={watch}
+                  />
+                </Box>
+              )}
+              <ControlledRadio
+                inputName={"Co jest twoim głównym celem?"}
+                tooltipText={
+                  "Potrzebujemy tych informacji żeby skalibrować odpowiedni trening do twoich predyspozycji "
+                }
+                name="goalInfo"
+                options={[
+                  { label: "Chcę schudnąć", checked: goalInfo === 0 },
+                  {
+                    label: "Chcę zbudować mięśnie",
+                    checked: goalInfo === 1,
+                  },
+                  {
+                    label: "Chcę schudnąć i zbudować mięśnie",
+                    checked: goalInfo === 2,
+                  },
+                ]}
+                isRequired={true}
+                setValue={setValue}
+                control={control}
+              />
+              <ControlledRadio
+                inputName={"Twoje dodatkowe cele"}
+                tooltipText={
+                  "Potrzebujemy tych informacji żeby skalibrować odpowiedni trening do twoich predyspozycji "
+                }
+                name="extraGoalInfo"
+                options={[
+                  {
+                    label: "Chcę być silniejszy",
+                    checked: extraGoalInfo === 0,
+                  },
+                  {
+                    label: "Chcę mieć lepszą kondycję",
+                    checked: extraGoalInfo === 1,
+                  },
+                  {
+                    label: "Chcę być silniejszy i mieć lepszą kondycję",
+                    checked: extraGoalInfo === 2,
+                  },
+                ]}
+                isRequired={true}
+                setValue={setValue}
+                control={control}
+              />
+            </Box>
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "row",
+                marginTop: "20px",
+                justifyContent: "space-between",
+              }}
+            >
+              <NextButton
+                buttonName="Powrót"
+                onClick={handleClickPersonalInfo}
+              />
+              <NextButton type="submit" buttonName="Dalej" />
+            </Box>
+          </FormControl>
+        </form>
       </Box>
     </div>
   );

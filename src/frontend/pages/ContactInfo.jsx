@@ -1,27 +1,19 @@
 import { useState } from "react";
 import { Header } from "../components/Header";
 import { TextInput } from "../components/TextInput";
-import { Checkbox } from "../components/CheckBox";
 import { NextButton } from "../components/NextButton";
 import { Box, FormControl, Typography } from "@mui/material";
 import { createPalette } from "../theme/palette";
 import { useNavigate } from "react-router-dom";
+import { ControlledCheckbox } from "../components/controlled/ControlledCheckbox";
+import { useForm } from "react-hook-form";
 const { blue, neutral } = createPalette();
 
 export const ContactInfo = () => {
   const navigate = useNavigate();
-
+  const { watch, control, setValue } = useForm();
   const [userName, setUserName] = useState("");
   const [mail, setMail] = useState("");
-  const [checkboxState, setCheckboxState] = useState([false, false]);
-
-  const handleCheckboxChange = (index) => {
-    setCheckboxState((prevState) => {
-      const newState = [...prevState];
-      newState[index] = !newState[index];
-      return newState;
-    });
-  };
 
   const handleClickSendInfo = () => {
     navigate("/Sent");
@@ -89,24 +81,20 @@ export const ContactInfo = () => {
               errorMessage={"Uzupełnij dane"}
               onChange={setMail}
             />
-            <Checkbox
+            <ControlledCheckbox
+              name="AgreedInfo"
               inputName={"Niezbędne zgody"}
               tooltipText={
                 "Potrzebujemy tych informacji żeby skalibrować odpowiedni trening do twoich predyspozycji "
               }
               options={[
-                {
-                  label: "Zgadzam się na kontakt mailowy",
-                  checked: checkboxState[0],
-                },
-                {
-                  label:
-                    "Jestem świadomy że wygenerowany plan treningowy NIE został opracowany przez profesjonalistów i nie ponoszą oni odpowiedzialności za moje zdebilnienie",
-                  checked: checkboxState[1],
-                },
+                "Zgadzam się na kontakt mailowy",
+                "Jestem świadomy że wygenerowany plan treningowy NIE został opracowany przez profesjonalistów i nie ponoszą oni odpowiedzialności za moje zdebilnienie",
               ]}
               isRequired={true}
-              onChange={handleCheckboxChange}
+              watch={watch}
+              control={control}
+              setValue={setValue}
             />
           </Box>
           <Box

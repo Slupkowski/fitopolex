@@ -4,10 +4,10 @@ import { NextButton } from "../components/NextButton";
 import { Box, FormControl, Typography } from "@mui/material";
 import { createPalette } from "../theme/palette";
 import { useNavigate } from "react-router-dom";
-import { ControllerInputField } from "../components/controlled/ControllerInputField";
-import { ControllerGenderGroup } from "../components/controlled/ControllerGenderGroup.jsx";
+import { ControlledInputField } from "../components/controlled/ControlledInputField.jsx";
+import { ControlledGenderGroup } from "../components/controlled/ControlledGenderGroup.jsx";
 import { useForm } from "react-hook-form";
-import { personalInfoSchema } from "../utils/schema.js";
+import { personalInfoSchema } from "../utils/PersonalInfoSchema.js";
 const { blue, neutral } = createPalette();
 
 export const PersonalInfo = () => {
@@ -66,7 +66,7 @@ export const PersonalInfo = () => {
               }}
             >
               <Box>
-                <ControllerGenderGroup
+                <ControlledGenderGroup
                   label="Płeć"
                   isRequired={true}
                   tooltipText={
@@ -78,7 +78,7 @@ export const PersonalInfo = () => {
                   errorMessage={formState.errors?.gender?.message}
                 />
               </Box>
-              <ControllerInputField
+              <ControlledInputField
                 label="Wiek"
                 tooltipText="Potrzebujemy informacji na temat twojego wieku żeby móc skalibrować odpowiedni trening do twoich predyspozycji"
                 isRequired={true}
@@ -86,7 +86,7 @@ export const PersonalInfo = () => {
                 control={control}
                 name="age"
               />
-              <ControllerInputField
+              <ControlledInputField
                 label={"Wzrost"}
                 tooltipText="Potrzebujemy informacji na temat twojego wzrostu żeby móc skalibrować odpowiedni trening do twoich predyspozycji"
                 type="number"
@@ -95,7 +95,7 @@ export const PersonalInfo = () => {
                 unit="cm"
                 name="height"
               />
-              <ControllerInputField
+              <ControlledInputField
                 label={"Waga"}
                 type="number"
                 control={control}
