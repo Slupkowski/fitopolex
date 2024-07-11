@@ -1,9 +1,9 @@
 import { z } from "zod";
 
 export const trainingInfoSchema = z.object({
-  timeInfo: z.enum([0, 1, 2]),
-  equipmentInfo: z.enum([0, 1, 2]),
-  goalInfo: z.enum([0, 1, 2]),
-  extraGoalInfo: z.enum([0, 1, 2]),
-  //zamiast enuma number min 0 max 2
+  timeInfo: z.number().gte(0).lte(2),
+  equipmentInfo: z.number().gte(0).lte(2),
+  goalInfo: z.number().gte(0).lte(2),
+  extraGoalInfo: z.number().gte(0).lte(2),
+  houseEquipment: z.boolean().array().length(4).optional(),
 });
