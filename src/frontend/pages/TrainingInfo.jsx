@@ -27,6 +27,7 @@ export const TrainingInfo = () => {
   };
 
   const onInSubmit = (values) => {
+    //TODO: Add error messages if nothing is selected on required
     console.log(values, formState);
   };
 

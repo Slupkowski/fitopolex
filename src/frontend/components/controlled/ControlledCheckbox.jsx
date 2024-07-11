@@ -4,10 +4,10 @@ export const ControlledCheckbox = ({
   inputName,
   options, // list of labels
   isRequired = false,
-  setValue,
-  name,
-  control,
-  watch,
+  setValue, // fun from react-hook-form
+  name, // name of the field in react-hook-form
+  control, // fun from react-hook-form
+  watch, // fun from react-hook-form
 }) => {
   const value = watch("houseEquipment");
 
@@ -16,17 +16,24 @@ export const ControlledCheckbox = ({
   }, []);
 
   const handleCheckboxChange = (index) => {
-    let newValue = [...value];
+    const prevValue = watch("houseEquipment");
+
+    let newValue = [...prevValue];
     newValue[index] = !newValue[index];
     if (index == 3) {
       newValue = [false, false, false, true];
+    } else {
+      newValue[3] = false;
     }
     setValue("houseEquipment", newValue);
   };
 
   return (
     <>
-      <input type="hidden" {...control.register(name)} />
+      <input
+        type="hidden"
+        {...control.register(name, { shouldUnregister: true })}
+      />
       <Checkbox
         inputName={inputName}
         options={options}
