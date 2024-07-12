@@ -10,27 +10,31 @@ import { useNavigate } from "react-router-dom";
 import { ControlledSingleCheckbox } from "../components/controlled/ControlledSingleCheckbox";
 import { ControlledInputField } from "../components/controlled/ControlledInputField";
 import { useForm } from "react-hook-form";
-const { blue, neutral } = createPalette();
+const { neutral } = createPalette();
 
 export const ContactInfo = () => {
   const navigate = useNavigate();
-  const { control, watch, handleSubmit, setValue, formState } = useForm({
-    resolver: zodResolver(contactInfoSchema),
-  });
-  const value = watch("agreedInfo");
+  const { control, watch, handleSubmit, setValue, formState, getValues } =
+    useForm({
+      resolver: zodResolver(contactInfoSchema),
+    });
 
   useEffect(() => {
-    setValue("agreedInfo", [false, false]);
+    setValue("agreeContact", false);
+  }, []);
+  useEffect(() => {
+    setValue("agreeSafety", false);
   }, []);
 
   const onSubmit = (values) => {
     console.log(values);
     navigate("/sent");
   };
-  console.log(formState);
+
   const handleClickTrainingInfo = () => {
     navigate("/traininginfo");
   };
+  console.log(formState, getValues());
 
   return (
     <div>
@@ -91,21 +95,32 @@ export const ContactInfo = () => {
                 control={control}
                 name="mailName"
               />
-              <ControlledSingleCheckbox
-                name="agreedInfo"
-                inputName={"Niezbędne zgody"}
-                tooltipText={
-                  "Potrzebujemy tych informacji żeby skalibrować odpowiedni trening do twoich predyspozycji "
-                }
-                options={[
-                  "Zgadzam się na kontakt mailowy",
-                  "Jestem świadomy że wygenerowany plan treningowy NIE został opracowany przez profesjonalistów i nie ponoszą oni odpowiedzialności za moje zdebilnienie",
-                ]}
-                isRequired={true}
-                watch={watch}
-                control={control}
-                setValue={setValue}
-              />
+              <Box sx={{ Gap: "10px" }}>
+                <Typography
+                  sx={{
+                    color: neutral[800],
+                    fontWeight: 600,
+                    lineHeight: "20px",
+                  }}
+                >
+                  Niezbędne zgody <span style={{ color: "red" }}> *</span>
+                </Typography>
+
+                <ControlledSingleCheckbox
+                  name="agreeContact"
+                  inputName={"Zgadzam się na kontakt mailowy"}
+                  isRequired={true}
+                  control={control}
+                />
+                <ControlledSingleCheckbox
+                  name="agreeSafety"
+                  inputName={
+                    "Jestem świadomy że wygenerowany plan treningowy NIE został opracowany przez profesjonalistów i nie ponoszą oni odpowiedzialności za moje zdebilnienie"
+                  }
+                  isRequired={true}
+                  control={control}
+                />
+              </Box>
             </Box>
             <Box
               sx={{
