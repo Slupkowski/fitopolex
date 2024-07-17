@@ -27,15 +27,30 @@ export const TrainingInfo = () => {
   };
 
   const onInSubmit = (values) => {
-    //TODO: Add error messages if nothing is selected on required
-    console.log(values, formState);
+    if (
+      timeInfo === "" ||
+      extraGoalInfo === "" ||
+      goalInfo === "" ||
+      equipmentInfo === ""
+    ) {
+      alert("Proszę zaznaczyć wszystkie opcje");
+    } else if (
+      timeInfo === "" &&
+      extraGoalInfo === "" &&
+      goalInfo === "" &&
+      equipmentInfo === ""
+    ) {
+      alert("Proszę zaznaczyć wszystkie opcje");
+    } else {
+      console.log(values, formState.errors);
+    }
   };
 
   const handleClickPersonalInfo = () => {
     navigate("/personalinfo");
   };
 
-  console.log(formState, getValues());
+  console.log(formState.errors.equipmentInfo?.message);
 
   return (
     <div>
@@ -86,6 +101,7 @@ export const TrainingInfo = () => {
                   "Potrzebujemy tych informacji żeby skalibrować odpowiedni trening do twoich predyspozycji "
                 }
                 name="timeInfo"
+                errorMessage={formState.errors?.timeInfo?.message}
                 options={[
                   {
                     label: "Co drugi dzień 2 godziny",
@@ -104,6 +120,7 @@ export const TrainingInfo = () => {
                   "Potrzebujemy tych informacji żeby skalibrować odpowiedni trening do twoich predyspozycji "
                 }
                 name="equipmentInfo"
+                errorMessage={formState.errors?.equipmentInfo?.message}
                 options={[
                   {
                     label: "Mogę chodzić na siłownie",
@@ -145,6 +162,7 @@ export const TrainingInfo = () => {
                   "Potrzebujemy tych informacji żeby skalibrować odpowiedni trening do twoich predyspozycji "
                 }
                 name="goalInfo"
+                errorMessage={formState.errors?.goalInfo?.message}
                 options={[
                   { label: "Chcę schudnąć", checked: goalInfo === 0 },
                   {
@@ -166,6 +184,7 @@ export const TrainingInfo = () => {
                   "Potrzebujemy tych informacji żeby skalibrować odpowiedni trening do twoich predyspozycji "
                 }
                 name="extraGoalInfo"
+                errorMessage={formState.errors?.extraGoalInfo?.message}
                 options={[
                   {
                     label: "Chcę być silniejszy",
