@@ -17,7 +17,7 @@ export const TextInput = ({
   type = "string",
   unit = "",
 }) => {
-  const { blue, neutral, teal } = createPalette();
+  const { neutral, teal } = createPalette();
 
   const handleChange = (e) => {
     let newValue = null;
