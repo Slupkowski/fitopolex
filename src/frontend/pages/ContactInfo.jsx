@@ -1,4 +1,3 @@
-import { useFormState } from "react-hook-form";
 import { useEffect } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { contactInfoSchema } from "../utils/ContactInfoSchema.js";
@@ -14,10 +13,9 @@ const { neutral } = createPalette();
 
 export const ContactInfo = () => {
   const navigate = useNavigate();
-  const { control, watch, handleSubmit, setValue, formState, getValues } =
-    useForm({
-      resolver: zodResolver(contactInfoSchema),
-    });
+  const { control, handleSubmit, setValue, formState, getValues } = useForm({
+    resolver: zodResolver(contactInfoSchema),
+  });
 
   useEffect(() => {
     setValue("agreeContact", false);
