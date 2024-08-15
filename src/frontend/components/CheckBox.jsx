@@ -2,7 +2,7 @@ import { Checkbox } from "@mui/material";
 import { Typography, Box } from "@mui/material";
 import { createPalette } from "../theme/palette";
 
-export const Checkbox = ({
+export const CustomCheckbox = ({
   inputName,
   options,
   value,

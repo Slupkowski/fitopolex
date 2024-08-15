@@ -2,7 +2,7 @@ import { Radio } from "@mui/material";
 import { Typography, Box, Tooltip } from "@mui/material";
 import { InfoOutlined } from "@mui/icons-material";
 import { createPalette } from "../theme/palette";
-export const Radio = ({
+export const CustomRadio = ({
   inputName,
   options,
   onChange,

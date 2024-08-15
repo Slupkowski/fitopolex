@@ -1,4 +1,4 @@
-import { Radio } from "../Radio";
+import { CustomRadio } from "../Radio";
 import { useEffect } from "react";
 import { Box, Typography } from "@mui/material";
 import { WarningAmberOutlined } from "@mui/icons-material";
@@ -21,7 +21,7 @@ export const ControlledRadio = ({
   return (
     <>
       <input type="hidden" {...control.register(name)} />
-      <Radio
+      <CustomRadio
         inputName={inputName}
         options={options}
         onChange={handleClick}

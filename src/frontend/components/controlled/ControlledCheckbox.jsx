@@ -1,4 +1,4 @@
-import { Checkbox } from "../CheckBox";
+import { CustomCheckbox } from "../CheckBox";
 import { useEffect } from "react";
 export const ControlledCheckbox = ({
   inputName,
@@ -34,7 +34,7 @@ export const ControlledCheckbox = ({
         type="hidden"
         {...control.register(name, { shouldUnregister: true })}
       />
-      <Checkbox
+      <CustomCheckbox
         inputName={inputName}
         options={options}
         value={value ?? [false, false, false, false]}
