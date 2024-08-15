@@ -24,8 +24,22 @@ export const ContactInfo = () => {
     setValue("agreeSafety", false);
   }, []);
 
-  const onSubmit = (values) => {
+  const onSubmit = async (values) => {
     console.log(values);
+    try {
+      const response = await fetch("http://localhost:3000", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(values),
+      });
+      const data = await response.json();
+      console.log("Response from server:", data);
+    } catch (error) {
+      console.error("Error submitting form:", error);
+    }
+
     navigate("/sent");
   };
 
@@ -47,7 +61,11 @@ export const ContactInfo = () => {
           minHeight: "600px",
         }}
       >
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          action="http://localhost:3000"
+          method="post"
+        >
           <FormControl
             sx={{
               width: "500px",
