@@ -1,4 +1,5 @@
 // server/index.js
+const { saveContactInfo } = require("./controllers/Form");
 const express = require("express");
 const cors = require("cors");
 const { MongoClient, ServerApiVersion } = require("mongodb");
@@ -51,7 +52,18 @@ run().catch(console.dir);
 
 const app = express();
 app.use(cors());
+app.use(express.json()); // Middleware to parse JSON
 
+// Endpoint do obsługi POST requestu
+app.post("/contactInfo", (req, res) => {
+  const formData = req.body; // Odebrane dane z formularza
+  console.log("Received data:", formData);
+  saveContactInfo(formData);
+  // Tutaj możesz zrobić cokolwiek z danymi - przetworzyć je, zwrócić odpowiedź itp.
+  res
+    .status(200)
+    .json({ message: "Data received successfully", data: formData });
+});
 app.get("/", (req, res) => {
   res.send("Hello from our server!");
 });

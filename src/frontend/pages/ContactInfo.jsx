@@ -19,15 +19,13 @@ export const ContactInfo = () => {
 
   useEffect(() => {
     setValue("agreeContact", false);
-  }, []);
-  useEffect(() => {
     setValue("agreeSafety", false);
   }, []);
 
   const onSubmit = async (values) => {
     console.log(values);
     try {
-      const response = await fetch("http://localhost:3000", {
+      const response = await fetch("http://localhost:3000/contactInfo", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -61,11 +59,7 @@ export const ContactInfo = () => {
           minHeight: "600px",
         }}
       >
-        <form
-          onSubmit={handleSubmit(onSubmit)}
-          action="http://localhost:3000"
-          method="post"
-        >
+        <form onSubmit={handleSubmit(onSubmit)}>
           <FormControl
             sx={{
               width: "500px",
