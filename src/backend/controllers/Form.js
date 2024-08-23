@@ -9,4 +9,17 @@ function saveContactInfo(data) {
   form.mailName = data.mailName;
   console.log(form);
 }
-module.exports = { saveContactInfo };
+function saveTrainingInfo(data) {
+  form.timeInfo = data.timeInfo;
+  form.extraGoalInfo = data.extraGoalInfo;
+  form.goalInfo = data.goalInfo;
+  form.equipmentInfo = data.equipmentInfo;
+  console.log(form);
+}
+function savePersonalInfo(data) {
+  form.gender = data.gender;
+  form.age = data.age;
+  form.height = data.height;
+  form.weight = data.weight;
+}
+module.exports = { saveContactInfo, saveTrainingInfo, savePersonalInfo };

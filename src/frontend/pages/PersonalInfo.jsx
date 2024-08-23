@@ -15,8 +15,21 @@ export const PersonalInfo = () => {
     resolver: zodResolver(personalInfoSchema),
   });
 
-  const onSubmit = (values) => {
+  const onSubmit = async (values) => {
     console.log(values);
+    try {
+      const response = await fetch("http://localhost:3000/personalInfo", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(values),
+      });
+      const data = await response.json();
+      console.log("Response from server:", data);
+    } catch (error) {
+      console.error("Error submitting form:", error);
+    }
     navigate("/trainingInfo");
   };
   const navigate = useNavigate();
