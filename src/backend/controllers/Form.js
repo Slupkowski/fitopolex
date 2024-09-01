@@ -1,5 +1,5 @@
 const { Form } = require("../models/Form");
-
+const { createPdf } = require("./PdfCreator");
 let form = Form();
 
 function saveContactInfo(data) {
@@ -21,5 +21,7 @@ function savePersonalInfo(data) {
   form.age = data.age;
   form.height = data.height;
   form.weight = data.weight;
+  // tutaj funkcja do generowania pdfu, jako argument form
+  createPdf(form);
 }
 module.exports = { saveContactInfo, saveTrainingInfo, savePersonalInfo };
