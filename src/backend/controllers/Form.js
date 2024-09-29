@@ -8,6 +8,9 @@ function saveContactInfo(data) {
   form.firstName = data.firstName;
   form.mailName = data.mailName;
   console.log(form);
+
+  // tutaj funkcja do generowania pdfu, jako argument form
+  createPdf(form);
 }
 function saveTrainingInfo(data) {
   form.timeInfo = data.timeInfo;
@@ -21,7 +24,6 @@ function savePersonalInfo(data) {
   form.age = data.age;
   form.height = data.height;
   form.weight = data.weight;
-  // tutaj funkcja do generowania pdfu, jako argument form
-  createPdf(form);
+  console.log(form);
 }
 module.exports = { saveContactInfo, saveTrainingInfo, savePersonalInfo };
