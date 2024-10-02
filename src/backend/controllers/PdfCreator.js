@@ -76,7 +76,6 @@ function createPdf(data) {
   doc.text("");
 
   doc.text(data.gender == "female" ? "Kobieta" : "Mężczyzna");
-  //TODO: dodaj wiek i bmi
   doc.text(data.age);
   doc.text(`BMI:${countBMI(data.weight, data.height).toFixed(2)}`);
   console.log(countBMI(data.weight, data.height));
@@ -84,6 +83,72 @@ function createPdf(data) {
   if (data.timeInfo == 0 || data.timeInfo == 2) {
     if (data.extraGoalInfo == 1) {
       //dodaj tabelki biegowe
+      const tableA = {
+        title: "Tydzień 1-2",
+        headers: ["Dzień", "Trening"],
+        rows: [
+          [
+            "Dzień 1",
+            "20 minut spaceru z 1-minutowymi odcinkami truchtu co 5 minut",
+          ],
+          [
+            "Dzień 3",
+            "25 minut spaceru z 1-minutowymi odcinkami truchtu co 4 minuty",
+          ],
+          [
+            "Dzień 5",
+            "25 minut spaceru z 2-minutowymi odcinkami truchtu co 5 minut",
+          ],
+        ],
+      };
+      doc.table(tableA, {
+        width: 300,
+        columnsSize: [200, 100, 100],
+      });
+      const tableB = {
+        title: "Tydzień 3-4",
+        headers: ["Dzień", "Trening"],
+        rows: [
+          [
+            "Dzień 1",
+            "30 minut marszobiegu - 2 minuty truchtu, 3 minuty marszu (powtórzyć 6 razy)",
+          ],
+          [
+            "Dzień 3",
+            "30 minut marszobiegu - 3 minuty truchtu, 2 minuty marszu (powtórzyć 6 razy)",
+          ],
+          [
+            "Dzień 5",
+            "35 minut marszobiegu - 3 minuty truchtu, 2 minuty marszu (powtórzyć 7 razy)",
+          ],
+        ],
+      };
+      doc.table(tableB, {
+        width: 300,
+        columnsSize: [200, 100, 100],
+      });
+      const tableC = {
+        title: "Tydzień 5-6",
+        headers: ["Dzień", "Trening"],
+        rows: [
+          [
+            "Dzień 1",
+            "35 minut marszobiegu - 4 minuty truchtu, 2 minuty marszu (powtórzyć 6 razy)",
+          ],
+          [
+            "Dzień 3",
+            "40 minut marszobiegu - 5 minut truchtu, 2 minuty marszu (powtórzyć 6 razy)",
+          ],
+          [
+            "Dzień 5",
+            "40 minut marszobiegu - 6 minut truchtu, 1 minuta marszu (powtórzyć 5 razy)",
+          ],
+        ],
+      };
+      doc.table(tableC, {
+        width: 300,
+        columnsSize: [200, 100, 100],
+      });
     } else {
       const tableA = {
         title: "Plan A",
