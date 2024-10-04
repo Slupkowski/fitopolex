@@ -194,6 +194,87 @@ function createPdf(data) {
     console.log(data.timeInfo, "/??", typeof data.timeInfo, data);
     if (data.extraGoalInfo == 1) {
       //dodaj tabelki biegowe
+      const tableA = {
+        title: "Tydzień 1-2",
+        headers: ["Dzień", "Trening"],
+        rows: [
+          [
+            "Dzień 1",
+            "20 minut spaceru z 1-minutowymi odcinkami truchtu co 5 minut",
+          ],
+          ["Dzień 2", "30 minut spaceru w umiarkowanym tempie"],
+          [
+            "Dzień 3",
+            "25 minut marszobiegu - 2 minuty truchtu, 3 minuty marszu (powtórzyć 5 razy)",
+          ],
+          ["Dzień 4", "30 minut spokojnego spaceru"],
+          [
+            "Dzień 5",
+            "25 minut marszobiegu - 3 minuty truchtu, 2 minuty marszu (powtórzyć 5 razy)",
+          ],
+          ["Dzień 6", "30 minut spokojnego spaceru"],
+          [
+            "Dzień 7",
+            "25 minut swobodnego truchtu z przerwami na marsz, kiedy czujesz zmęczenie",
+          ],
+        ],
+      };
+      doc.table(tableA, {
+        width: 300,
+        columnsSize: [200, 100, 100],
+      });
+      const tableB = {
+        title: "Tydzień 3-4",
+        headers: ["Dzień", "Trening"],
+        rows: [
+          [
+            "Dzień 1",
+            "30 minut marszobiegu - 3 minuty truchtu, 2 minuty marszu (powtórzyć 6 razy)",
+          ],
+          ["Dzień 2", "35 minut spaceru w umiarkowanym tempie"],
+          [
+            "Dzień 3",
+            "35 minut marszobiegu - 4 minuty truchtu, 2 minuty marszu (powtórzyć 6 razy)",
+          ],
+          ["Dzień 4", "30 minut spokojnego spaceru"],
+          [
+            "Dzień 5",
+            "40 minut marszobiegu - 5 minut truchtu, 2 minuty marszu (powtórzyć 6 razy)",
+          ],
+          ["Dzień 6", "30 minut spokojnego spaceru"],
+          ["Dzień 7", "35 minut swobodnego biegu/truchtu w wolnym tempie"],
+        ],
+      };
+      doc.table(tableB, {
+        width: 300,
+        columnsSize: [200, 100, 100],
+      });
+      const tableC = {
+        title: "Tydzień 5-6",
+        headers: ["Dzień", "Trening"],
+        rows: [
+          [
+            "Dzień 1",
+            "40 minut marszobiegu - 5 minut truchtu, 2 minuty marszu (powtórzyć 7 razy)",
+          ],
+          ["Dzień 2", "35 minut spaceru w umiarkowanym tempie"],
+          [
+            "Dzień 3",
+            "45 minut marszobiegu - 6 minut truchtu, 1 minuta marszu (powtórzyć 6 razy)",
+          ],
+          ["Dzień 4", "30 minut spokojnego spaceru"],
+          [
+            "Dzień 5",
+            "45 minut biegu - 7 minut biegu, 1 minuta marszu (powtórzyć 5 razy)",
+          ],
+          ["Dzień 6", "35 minut spaceru w umiarkowanym tempie"],
+          ["Dzień 7", "40 minut ciągłego biegu w wolnym tempie"],
+        ],
+      };
+      doc.table(tableC, {
+        width: 300,
+        columnsSize: [200, 100, 100],
+      });
     } else {
     }
   }
