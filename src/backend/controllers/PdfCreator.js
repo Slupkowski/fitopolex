@@ -1,58 +1,62 @@
 const fs = require("fs");
 const { default: PDFDocumentWithTables } = require("pdfkit-table");
 
-// const doc = new PDFDocumentWithTables({ margin: 30, size: "A4" });
-
-// doc.pipe(
-//   fs.createWriteStream("../../documents/fitopolex/src/documents/ratunku1.pdf")
-// );
-// doc.text(`Plan Treningowy`);
-
-// (async function () {
-//   const table = {
-//     title: "Plan A",
-//     headers: ["Ćwiczenie", "ilość powtórzeń"],
-//     rows: [
-//       ["Przysiad", "5x5"],
-//       ["Wyciskanie", "5x5"],
-//       ["Wiosłowanie", "5x5"],
-//     ],
-//   };
-//   await doc.table(table, {
-//     width: 300,
-//   });
-//   await doc.table(table, {
-//     columnsSize: [200, 100, 100],
-//   });
-// })();
-// (async function () {
-//   const table = {
-//     title: "Plan B",
-//     headers: ["Ćwiczenie", "ilość powtórzeń"],
-//     rows: [
-//       ["Martwy Ciąg", "5x5"],
-//       ["Wyciskanie Żołnierskie", "5x5"],
-//       ["Podciąganie", "5x5"],
-//     ],
-//   };
-//   await doc.table(table, {
-//     width: 300,
-//     columnsSize: [200, 100, 100],
-//   });
-//   await doc.table(table, {
-//     columnsSize: [200, 100, 100],
-//   });
-// })();
-// doc.font(
-//   "../../documents/fitopolex/src/fonts/RobotoSlab-VariableFont_wght.ttf"
-// );
-// doc.text("Test PDF bez tabeli z ąśźżćł.");
-// doc.end();
-
 function countBMI(weight, height) {
   return (weight / (height * height)) * 10000;
 }
-
+function reps(type, goalInfo, extraGoalInfo) {
+  if (
+    type == "main" &&
+    goalInfo == 0 &&
+    (extraGoalInfo == 0 || extraGoalInfo == 1 || extraGoalInfo == 2)
+  ) {
+    return "5x5";
+  } else if (
+    type == "side" &&
+    goalInfo == 0 &&
+    (extraGoalInfo == 0 || extraGoalInfo == 1 || extraGoalInfo == 2)
+  ) {
+    return "3x8";
+  } else if (
+    type == "main" &&
+    (goalInfo == 1 || goalInfo == 2) &&
+    (extraGoalInfo == 0 || extraGoalInfo == 1 || extraGoalInfo == 2)
+  ) {
+    return "3x8";
+  } else if (
+    type == "side" &&
+    (goalInfo == 1 || goalInfo == 2) &&
+    (extraGoalInfo == 0 || extraGoalInfo == 1 || extraGoalInfo == 2)
+  ) {
+    return "3x12";
+  }
+  return "";
+}
+function exercise(legs, chest, back, equipmentInfo, houseEquipment) {
+  //Nogi
+  if (legs == "A" && equipmentInfo == 0) {
+    return "Przysiady";
+  } else if ((legs = "B" && equipmentInfo == 0)) {
+    return "Martwy ciąg";
+  } else if ((legs = "A" && equipmentInfo == 1)) {
+  } else if ((legs = "B" && equipmentInfo == 1)) {
+  } else if ((legs = "A" && equipmentInfo == 2 && houseEquipment == 0)) {
+  } else if ((legs = "A" && equipmentInfo == 2 && houseEquipment == 1)) {
+  } else if ((legs = "A" && equipmentInfo == 2 && houseEquipment == 2)) {
+  } else if ((legs = "A" && equipmentInfo == 2 && houseEquipment == 3)) {
+  } else if ((legs = "B" && equipmentInfo == 2 && houseEquipment == 0)) {
+  } else if ((legs = "B" && equipmentInfo == 2 && houseEquipment == 1)) {
+  } else if ((legs = "B" && equipmentInfo == 2 && houseEquipment == 2)) {
+  } else if ((legs = "B" && equipmentInfo == 2 && houseEquipment == 3)) {
+  }
+}
+// function cardio(extraGoalInfo) {
+//   if (extraGoalInfo == 2) {
+//     return "bieganie", "20 minut";
+//   } else {
+//     return "Łydki", reps("side", data.goalInfo, data.extraGoalInfo);
+//   }
+// }
 function createPdf(data) {
   const doc = new PDFDocumentWithTables({ margin: 30, size: "A4" });
   doc.pipe(
@@ -102,6 +106,11 @@ function createPdf(data) {
         ],
       };
       doc.table(tableA, {
+        prepareRow: () => {
+          doc.font(
+            "../../documents/fitopolex/src/fonts/RobotoSlab-VariableFont_wght.ttf"
+          );
+        },
         width: 300,
         columnsSize: [200, 100, 100],
       });
@@ -152,14 +161,37 @@ function createPdf(data) {
     } else {
       const tableA = {
         title: "Plan A",
-        headers: ["Ćwiczenie", "ilość powtórzeń"],
+        headers: ["Ćwiczenie", "Ilość powtórzeń"],
         rows: [
-          ["Martwy Ciąg", "5x5"],
-          ["Wyciskanie Żołnierskie", "5x5"],
-          ["Podciąganie", "5x5"],
+          ["Martwy Ciąg", reps("main", data.goalInfo, data.extraGoalInfo)],
+          [
+            "Wyciskanie Żołnierskie",
+            reps("main", data.goalInfo, data.extraGoalInfo),
+          ],
+          ["Podciąganie", reps("main", data.goalInfo, data.extraGoalInfo)],
+          ["Wznosy bokiem", reps("side", data.goalInfo, data.extraGoalInfo)],
+          ["Biceps", reps("side", data.goalInfo, data.extraGoalInfo)],
+          ["Triceps", reps("side", data.goalInfo, data.extraGoalInfo)],
+          ["Deska", "3 razy do upadku mięśniowego"],
+          [
+            data.extraGoalInfo == 2 ? "Bieganie" : "Łydki",
+            data.extraGoalInfo == 2
+              ? "20 minut"
+              : reps("side", data.goalInfo, data.extraGoalInfo),
+          ],
         ],
       };
       doc.table(tableA, {
+        prepareHeader: () => {
+          doc.font(
+            "../../documents/fitopolex/src/fonts/RobotoSlab-VariableFont_wght.ttf"
+          );
+        },
+        prepareRow: () => {
+          doc.font(
+            "../../documents/fitopolex/src/fonts/RobotoSlab-VariableFont_wght.ttf"
+          );
+        },
         width: 300,
         columnsSize: [200, 100, 100],
       });
@@ -176,14 +208,37 @@ function createPdf(data) {
                 ? "z gumami"
                 : ""
             }`,
-            "5x5",
+            reps("main", data.goalInfo, data.extraGoalInfo),
           ],
-          ["Wyciskanie Żołnierskie", "5x5"],
-          ["Podciąganie", "5x5"],
-          data.extraGoalInfo == 2 ? ["cardio", "10minut"] : null,
+          [
+            "Wyciskanie Żołnierskie",
+            reps("main", data.goalInfo, data.extraGoalInfo),
+          ],
+          ["Wiosłowanie", reps("main", data.goalInfo, data.extraGoalInfo)],
+          ["Wznosy bokiem", reps("side", data.goalInfo, data.extraGoalInfo)],
+          ["Podciąganie", reps("side", data.goalInfo, data.extraGoalInfo)],
+          ["Biceps", reps("side", data.goalInfo, data.extraGoalInfo)],
+          ["Triceps", reps("side", data.goalInfo, data.extraGoalInfo)],
+          ["Allahy", reps("side", data.goalInfo, data.extraGoalInfo)],
+          [
+            data.extraGoalInfo == 2 ? "Bieganie" : "Łydki",
+            data.extraGoalInfo == 2
+              ? "20 minut"
+              : reps("side", data.goalInfo, data.extraGoalInfo),
+          ],
         ],
       };
       doc.table(tableB, {
+        prepareHeader: () => {
+          doc.font(
+            "../../documents/fitopolex/src/fonts/RobotoSlab-VariableFont_wght.ttf"
+          );
+        },
+        prepareRow: () => {
+          doc.font(
+            "../../documents/fitopolex/src/fonts/RobotoSlab-VariableFont_wght.ttf"
+          );
+        },
         width: 300,
         columnsSize: [200, 100, 100],
       });
@@ -220,9 +275,20 @@ function createPdf(data) {
         ],
       };
       doc.table(tableA, {
+        prepareHeader: () => {
+          doc.font(
+            "../../documents/fitopolex/src/fonts/RobotoSlab-VariableFont_wght.ttf"
+          );
+        },
+        prepareRow: () => {
+          doc.font(
+            "../../documents/fitopolex/src/fonts/RobotoSlab-VariableFont_wght.ttf"
+          );
+        },
         width: 300,
         columnsSize: [200, 100, 100],
       });
+      doc.addPage();
       const tableB = {
         title: "Tydzień 3-4",
         headers: ["Dzień", "Trening"],
@@ -246,6 +312,16 @@ function createPdf(data) {
         ],
       };
       doc.table(tableB, {
+        prepareHeader: () => {
+          doc.font(
+            "../../documents/fitopolex/src/fonts/RobotoSlab-VariableFont_wght.ttf"
+          );
+        },
+        prepareRow: () => {
+          doc.font(
+            "../../documents/fitopolex/src/fonts/RobotoSlab-VariableFont_wght.ttf"
+          );
+        },
         width: 300,
         columnsSize: [200, 100, 100],
       });
@@ -272,6 +348,16 @@ function createPdf(data) {
         ],
       };
       doc.table(tableC, {
+        prepareHeader: () => {
+          doc.font(
+            "../../documents/fitopolex/src/fonts/RobotoSlab-VariableFont_wght.ttf"
+          );
+        },
+        prepareRow: () => {
+          doc.font(
+            "../../documents/fitopolex/src/fonts/RobotoSlab-VariableFont_wght.ttf"
+          );
+        },
         width: 300,
         columnsSize: [200, 100, 100],
       });
