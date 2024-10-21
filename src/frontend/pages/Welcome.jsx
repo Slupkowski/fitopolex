@@ -38,20 +38,20 @@ export const Welcome = () => {
         }}
       >
         <Typography variant="body1">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam tempus
-          massa metus, vitae interdum dui tincidunt at. Nunc vitae libero non
-          est dictum malesuada vel ac dolor. Mauris mauris massa, blandit sit
-          amet metus eget, pulvinar elementum mi. Sed id massa non lorem feugiat
-          tempus. Donec volutpat sed mauris quis maximus. Duis sodales porta
-          pulvinar. Etiam ut luctus urna. Nulla ultrices egestas dolor sit amet
-          faucibus. Maecenas laoreet eget sem a consectetur. Aenean gravida
-          consectetur leo, a vestibulum ante dignissim nec. Nulla quis convallis
-          justo. Nunc ac arcu rhoncus, finibus tellus quis, sagittis justo.
-          Aliquam quis urna sit amet nibh gravida gravida. Nullam rhoncus odio
-          quam, at porttitor nisi elementum sed. Pellentesque ut nulla
-          tincidunt, auctor ante nec, congue erat. Curabitur ultrices, purus sed
-          lacinia aliquet, lorem nisl lobortis tortor, nec consectetur tellus mi
-          vel eros.
+          Maupapp to strona dla ludzi którzy chcieliby zmienić swoją sylwetkę
+          ale nie wiedzą za co się zabrać. Znajdziesz tu wszystkie informacje
+          których potrzebujesz żeby dbać o swoje zdrowie. Możesz zacząć swoją
+          przygodę ze sportem dzięki naszemu intuicyjnemu generatorowi
+          treningów! Stworzyliśmy proste w użyciu narzędzie, które pomoże Ci
+          zaplanować efektywny i dopasowany do Twoich potrzeb plan treningowy,
+          niezależnie od tego, czy chcesz wzmocnić mięśnie, zbudować
+          wytrzymałość, czy po prostu poprawić kondycję. Dlaczego warto nas
+          wybrać? Personalizacja: Dostosuj trening do swojego poziomu
+          zaawansowania i celów. Prostota: Intuicyjny interfejs pozwala szybko
+          wygenerować plan treningowy bez zbędnych komplikacji. Dla każdego:
+          Idealne rozwiązanie dla osób, które dopiero zaczynają swoją przygodę z
+          siłownią lub bieganiem. Wejdź na wyższy poziom i osiągnij swoje
+          sportowe cele z naszym generatorem!
         </Typography>
       </Box>
     </div>
