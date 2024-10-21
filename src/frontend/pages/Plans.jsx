@@ -35,6 +35,7 @@ export const Plans = () => {
           border: "2px",
           display: "flex",
           flexDirection: "row",
+          justifyContent: "center",
         }}
       >
         <Plan
