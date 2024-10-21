@@ -35,19 +35,74 @@ function reps(type, goalInfo, extraGoalInfo) {
 function exercise(legs, chest, back, equipmentInfo, houseEquipment) {
   //Nogi
   if (legs == "A" && equipmentInfo == 0) {
-    return "Przysiady";
+    return "Przysiad ze sztangą klasyczny";
   } else if ((legs = "B" && equipmentInfo == 0)) {
-    return "Martwy ciąg";
+    return "Martwy ciąg klasyczny";
   } else if ((legs = "A" && equipmentInfo == 1)) {
+    return "Przysiad z wyskokiem";
   } else if ((legs = "B" && equipmentInfo == 1)) {
+    return "Horse stance";
   } else if ((legs = "A" && equipmentInfo == 2 && houseEquipment == 0)) {
+    return "Przysiad z wyskokiem";
   } else if ((legs = "A" && equipmentInfo == 2 && houseEquipment == 1)) {
+    return "Przysiad z hantlami";
   } else if ((legs = "A" && equipmentInfo == 2 && houseEquipment == 2)) {
+    return "Przysiad z gumą";
   } else if ((legs = "A" && equipmentInfo == 2 && houseEquipment == 3)) {
+    return "Przysiad z wyskokiem";
   } else if ((legs = "B" && equipmentInfo == 2 && houseEquipment == 0)) {
+    return "Horse stance";
   } else if ((legs = "B" && equipmentInfo == 2 && houseEquipment == 1)) {
+    return "Horse stance z hantlami";
   } else if ((legs = "B" && equipmentInfo == 2 && houseEquipment == 2)) {
+    return "Horse stance";
   } else if ((legs = "B" && equipmentInfo == 2 && houseEquipment == 3)) {
+    return "horse stance";
+  }
+  //Klata
+  if (chest == "A" && equipmentInfo == 0) {
+    return "Wyciskanie na ławce prostej";
+  } else if ((chest = "B" && equipmentInfo == 0)) {
+    return "Wyciskanie na ławce skośnej";
+  } else if ((chest = "A" && equipmentInfo == 1)) {
+    return "Dipy";
+  } else if ((chest = "B" && equipmentInfo == 1)) {
+    return "Bar Dipy";
+  } else if ((chest = "A" && equipmentInfo == 2 && houseEquipment == 0)) {
+    return "Pompki klasyczne";
+  } else if ((chest = "A" && equipmentInfo == 2 && houseEquipment == 1)) {
+    return "Wyciskanie hantli na stołku";
+  } else if ((chest = "A" && equipmentInfo == 2 && houseEquipment == 2)) {
+    return "Pompki z gumą";
+  } else if ((chest = "A" && equipmentInfo == 2 && houseEquipment == 3)) {
+    return "Pompki klasyczne";
+  } else if ((chest = "B" && equipmentInfo == 2 && houseEquipment == 0)) {
+    return "Pompki diamentowe";
+  } else if ((chest = "B" && equipmentInfo == 2 && houseEquipment == 1)) {
+    return "Rozpiętki hantlami na stołku";
+  } else if ((chest = "B" && equipmentInfo == 2 && houseEquipment == 2)) {
+    return "Pompki diamentowe z gumą";
+  } else if ((chest = "B" && equipmentInfo == 2 && houseEquipment == 3)) {
+    return "Pompki diamentowe";
+  }
+  //Plecy
+  if (back == "A" && equipmentInfo == 0) {
+    return "Podciąganie";
+  } else if ((back = "B" && equipmentInfo == 0)) {
+    return "Wiosłowanie";
+  } else if ((back = "A" && equipmentInfo == 1)) {
+    return "Podciąganie";
+  } else if ((back = "B" && equipmentInfo == 1)) {
+    return "Podciąganie australijskie";
+  } else if ((back = "A" && equipmentInfo == 2 && houseEquipment == 0)) {
+    return "Podciąganie";
+  } else if ((back = "A" && equipmentInfo == 2 && houseEquipment == 1)) {
+  } else if ((back = "A" && equipmentInfo == 2 && houseEquipment == 2)) {
+  } else if ((back = "A" && equipmentInfo == 2 && houseEquipment == 3)) {
+  } else if ((back = "B" && equipmentInfo == 2 && houseEquipment == 0)) {
+  } else if ((back = "B" && equipmentInfo == 2 && houseEquipment == 1)) {
+  } else if ((back = "B" && equipmentInfo == 2 && houseEquipment == 2)) {
+  } else if ((back = "B" && equipmentInfo == 2 && houseEquipment == 3)) {
   }
 }
 // function cardio(extraGoalInfo) {
