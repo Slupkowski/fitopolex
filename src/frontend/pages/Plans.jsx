@@ -1,11 +1,9 @@
 import { Header } from "../components/Header";
 import { Box, Typography, Button } from "@mui/material";
-import { createPalette } from "../theme/palette";
 import { useNavigate } from "react-router-dom";
 import { Plan } from "../components/Plan";
 
 export const Plans = () => {
-  const { blue } = createPalette();
   const navigate = useNavigate();
   const handleClickPersonalInfo = () => {
     navigate("/personalinfo");
@@ -20,17 +18,14 @@ export const Plans = () => {
           height: "200px",
           margin: "0 auto",
           display: "flex",
+          justifyContent: "center",
           textAlign: "center",
           alignItems: "center",
+          fontSize: "40px",
+          fontWeight: "600",
         }}
       >
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam tempus
-        massa metus, vitae interdum dui tincidunt at. Nunc vitae libero non est
-        dictum malesuada vel ac dolor. Mauris mauris massa, blandit sit amet
-        metus eget, pulvinar elementum mi. Sed id massa non lorem feugiat
-        tempus. Donec volutpat sed mauris quis maximus. Duis sodales porta
-        pulvinar. Etiam ut luctus urna. Nulla ultrices egestas dolor sit amet
-        faucibus.
+        Wybierz co cię interesuje
       </Typography>
       <Box
         sx={{
@@ -44,38 +39,17 @@ export const Plans = () => {
       >
         <Plan
           title="Plan dla osoby początkującej"
-          description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam
-            tempus massa metus, vitae interdum dui tincidunt at. Nunc vitae
-            libero non est dictum malesuada vel ac dolor. Mauris mauris massa,
-            blandit sit amet metus eget, pulvinar elementum mi. Sed id massa non
-            lorem feugiat tempus. Donec volutpat sed mauris quis maximus. Duis
-            sodales porta pulvinar. Etiam ut luctus urna. Nulla ultrices egestas
-            dolor sit amet faucibus."
-          buttonText="Generuj plan"
+          description="Tu możesz za darmo wygenerować plan treningowy na podstawie swoich preferencji"
           onClick={() => handleClickPersonalInfo()}
         />
         <Plan
           title="Spersonalizowany plan + dieta"
-          description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam
-            tempus massa metus, vitae interdum dui tincidunt at. Nunc vitae
-            libero non est dictum malesuada vel ac dolor. Mauris mauris massa,
-            blandit sit amet metus eget, pulvinar elementum mi. Sed id massa non
-            lorem feugiat tempus. Donec volutpat sed mauris quis maximus. Duis
-            sodales porta pulvinar. Etiam ut luctus urna. Nulla ultrices egestas
-            dolor sit amet faucibus."
-          buttonText="Kup Teraz"
+          description="Tu możesz kupić plan oraz dietę rozpisane przez trenera na podstawie twoich preferencji"
           onClick={() => handleClickPersonalInfo()}
         />
         <Plan
-          title="Prowadzenie przez 6 tygodni przez trenera"
-          description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam
-            tempus massa metus, vitae interdum dui tincidunt at. Nunc vitae
-            libero non est dictum malesuada vel ac dolor. Mauris mauris massa,
-            blandit sit amet metus eget, pulvinar elementum mi. Sed id massa non
-            lorem feugiat tempus. Donec volutpat sed mauris quis maximus. Duis
-            sodales porta pulvinar. Etiam ut luctus urna. Nulla ultrices egestas
-            dolor sit amet faucibus."
-          buttonText="Kup Teraz"
+          title="Prowadzenie 6 tygodni przez trenera"
+          description="Tu możesz kupić 6 tygodni wsparcia wykwalifikowanego specjalisty."
           onClick={() => handleClickPersonalInfo()}
         />
       </Box>

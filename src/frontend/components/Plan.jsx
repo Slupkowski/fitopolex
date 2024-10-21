@@ -1,19 +1,23 @@
 import { Box, Typography, Button } from "@mui/material";
+import { createPalette } from "../theme/palette";
 
-export const Plan = ({ description, buttonText, onClick, title }) => {
+const { teal } = createPalette();
+export const Plan = ({ description, onClick, title }) => {
   return (
     <Box
+      onClick={onClick}
       sx={{
-        width: "33%",
-        height: "100%",
+        width: "400px",
+        height: "200px",
         display: "flex",
         flexDirection: "column",
         justifyContent: "space-between",
         "&:hover": {
-          border: "2px solid black",
+          cursor: "pointer",
           borderRadius: "20px",
           boxShadow: "10px 10px 5px lightblue",
           transitionDuration: "500ms",
+          bgcolor: teal[100],
         },
       }}
     >
@@ -25,18 +29,15 @@ export const Plan = ({ description, buttonText, onClick, title }) => {
           margin: "10px",
         }}
       >
-        <Typography sx={{ fontWeight: "600" }}>{title}</Typography>
+        <Typography sx={{ fontWeight: "600", fontSize: "20px" }}>
+          {title}
+        </Typography>
 
-        <Typography sx={{ padding: "16px" }}>{description}</Typography>
-      </Box>
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "center",
-          padding: "30px",
-        }}
-      >
-        <Button onClick={onClick}>{buttonText}</Button>
+        <Typography
+          sx={{ padding: "16px", fontWeight: "600px", fontSize: "20px" }}
+        >
+          {description}
+        </Typography>
       </Box>
     </Box>
   );
