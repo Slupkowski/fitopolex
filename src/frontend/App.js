@@ -11,6 +11,8 @@ import { PersonalInfo } from "./pages/PersonalInfo";
 import { TrainingInfo } from "./pages/TrainingInfo";
 import { ContactInfo } from "./pages/ContactInfo";
 import { Sent } from "./pages/Sent";
+import { Fail } from "./pages/Fail";
+import { BuyerForm } from "./pages/BuyerForm";
 
 const App = () => {
   const apiCall = () => {
@@ -34,6 +36,8 @@ const App = () => {
         <Route exact path="/traininginfo" element={<TrainingInfo />} />
         <Route exact path="/contactinfo" element={<ContactInfo />} />
         <Route exact path="/sent" element={<Sent />} />
+        <Route exact path="/fail" element={<Fail />} />
+        <Route exact path="/buyerform" element={<BuyerForm />} />
       </Routes>
       {/* <p className="text-3xl font-bold underline"> Grypsuje...</p>
       <button onClick={apiCall}>Make API Call</button>

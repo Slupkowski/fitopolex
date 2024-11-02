@@ -8,6 +8,9 @@ export const Plans = () => {
   const handleClickPersonalInfo = () => {
     navigate("/personalinfo");
   };
+  const handleClickBuyerForm = () => {
+    navigate("/BuyerForm");
+  };
   return (
     <div>
       <Header />
@@ -46,12 +49,12 @@ export const Plans = () => {
         <Plan
           title="Spersonalizowany plan + dieta"
           description="Tu możesz kupić plan oraz dietę rozpisane przez trenera na podstawie twoich preferencji"
-          onClick={() => handleClickPersonalInfo()}
+          onClick={() => handleClickBuyerForm()}
         />
         <Plan
           title="Prowadzenie 6 tygodni przez trenera"
           description="Tu możesz kupić 6 tygodni wsparcia wykwalifikowanego specjalisty."
-          onClick={() => handleClickPersonalInfo()}
+          onClick={() => handleClickBuyerForm()}
         />
       </Box>
     </div>
