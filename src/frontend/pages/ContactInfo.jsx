@@ -24,21 +24,25 @@ export const ContactInfo = () => {
 
   const onSubmit = async (values) => {
     console.log(values);
-    try {
-      const response = await fetch("http://localhost:3000/contactInfo", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(values),
-      });
-      const data = await response.json();
-      console.log("Response from server:", data);
-    } catch (error) {
-      console.error("Error submitting form:", error);
-    }
+    if (values.agreeContact == false || !values.agreeSafety) {
+      alert("Niezbędne zgody są wymagane");
+    } else {
+      try {
+        const response = await fetch("http://localhost:3000/contactInfo", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(values),
+        });
+        const data = await response.json();
+        console.log("Response from server:", data);
+      } catch (error) {
+        console.error("Error submitting form:", error);
+      }
 
-    navigate("/sent");
+      navigate("/sent");
+    }
   };
 
   const handleClickTrainingInfo = () => {
