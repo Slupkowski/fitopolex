@@ -28,7 +28,7 @@ export const BuyerForm = () => {
       alert("Niezbędne zgody są wymagane");
     } else {
       try {
-        const response = await fetch("http://localhost:3000/contactInfo", {
+        const response = await fetch("http://localhost:3000/sendEmail", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

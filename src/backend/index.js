@@ -1,14 +1,17 @@
 // server/index.js
+require("dotenv").config();
 const {
   saveContactInfo,
   saveTrainingInfo,
   savePersonalInfo,
 } = require("./controllers/Form");
+const Email = require("email-templates");
 const express = require("express");
 const cors = require("cors");
+const path = require("path");
 const { MongoClient, ServerApiVersion } = require("mongodb");
 
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 const uri =
   "mongodb+srv://admin:admin@customers.k8bl6.mongodb.net/?retryWrites=true&w=majority&appName=Customers";
@@ -80,6 +83,7 @@ app.post("/trainingInfo", (req, res) => {
     .status(200)
     .json({ message: "Data received successfully", data: formData });
 });
+
 app.post("/personalInfo", (req, res) => {
   const formData = req.body; // Odebrane dane z formularza
   console.log("Received data:", formData);
@@ -92,6 +96,57 @@ app.post("/personalInfo", (req, res) => {
 });
 app.get("/", (req, res) => {
   res.send("Hello from our server!");
+});
+
+// mailowe sprawy
+
+const email = new Email({
+  message: {
+    from: `"NodeJS" <${process.env.SENDER_EMAIL}>`,
+  },
+  //textOnly: true,
+  send: true,
+  //preview: false
+  transport: {
+    host: process.env.SMTP_HOST,
+    port: process.env.SMTP_PORT,
+    secure: false,
+    auth: {
+      user: process.env.SMTP_USER,
+      pass: process.env.SMTP_PASS,
+    },
+    tls: {
+      ciphers: "SSLv3",
+    },
+  },
+});
+
+app.post("/sendEmail", async (req, res) => {
+  const { firstName, lastName, mailName, phoneNumber } = req.body;
+  console.log(path.join(__dirname, "emails", "welcome"));
+  email
+    .send({
+      template: path.join(__dirname, "emails", "welcome"),
+      message: {
+        to: mailName,
+      },
+      locals: {
+        name: `${firstName} ${lastName}`,
+      },
+    })
+    .then((result) => {
+      console.log("Email sent to", mailName, result);
+      res
+        .status(200)
+        .json({ status: "success", message: "Email sent successfully" });
+    })
+    .catch((err) => {
+      console.error("Error sending email:", err);
+      res.status(500).json({
+        status: "error",
+        message: "Failed to send email, please try again.",
+      });
+    });
 });
 
 app.listen(PORT, () => {
