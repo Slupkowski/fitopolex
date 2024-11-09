@@ -32,84 +32,161 @@ function reps(type, goalInfo, extraGoalInfo) {
   }
   return "";
 }
-function exercise(legs, chest, back, equipmentInfo, houseEquipment) {
+function exercise(
+  legs,
+  chest,
+  back,
+  delts,
+  triceps,
+  biceps,
+  abs,
+  equipmentInfo,
+  houseEquipment
+) {
   //Nogi
-  if (legs == "A" && equipmentInfo == 0) {
-    return "Przysiad ze sztangą klasyczny";
-  } else if ((legs = "B" && equipmentInfo == 0)) {
-    return "Martwy ciąg klasyczny";
-  } else if ((legs = "A" && equipmentInfo == 1)) {
-    return "Przysiad z wyskokiem";
-  } else if ((legs = "B" && equipmentInfo == 1)) {
-    return "Horse stance";
-  } else if ((legs = "A" && equipmentInfo == 2 && houseEquipment == 0)) {
-    return "Przysiad z wyskokiem";
-  } else if ((legs = "A" && equipmentInfo == 2 && houseEquipment == 1)) {
-    return "Przysiad z hantlami";
-  } else if ((legs = "A" && equipmentInfo == 2 && houseEquipment == 2)) {
-    return "Przysiad z gumą";
-  } else if ((legs = "A" && equipmentInfo == 2 && houseEquipment == 3)) {
-    return "Przysiad z wyskokiem";
-  } else if ((legs = "B" && equipmentInfo == 2 && houseEquipment == 0)) {
-    return "Horse stance";
-  } else if ((legs = "B" && equipmentInfo == 2 && houseEquipment == 1)) {
-    return "Horse stance z hantlami";
-  } else if ((legs = "B" && equipmentInfo == 2 && houseEquipment == 2)) {
-    return "Horse stance";
-  } else if ((legs = "B" && equipmentInfo == 2 && houseEquipment == 3)) {
-    return "horse stance";
+  if (legs == "A") {
+    if (equipmentInfo == 0) {
+      return "Przysiad ze sztangą klasyczny";
+    } else if (equipmentInfo == 1) {
+      return "Przysiad z wyskokiem";
+    } else if (equipmentInfo == 2) {
+      if (houseEquipment[1] == true) {
+        return "Przysiad z hantlami";
+      } else if (houseEquipment[2] == true) {
+        return "Przysiad z gumą";
+      } else {
+        return "Przysiad z wyskokiem";
+      }
+    }
+  } else if (legs == "B") {
+    if (equipmentInfo == 0) {
+      return "Martwy ciąg klasyczny";
+    } else if (equipmentInfo == 1) {
+      return "Horse stance";
+    } else if (equipmentInfo == 2) {
+      if (houseEquipment[1] == true) {
+        return "Horse stance z hantlami";
+      } else {
+        return "Horse stance";
+      }
+    }
   }
-  //Klata
-  if (chest == "A" && equipmentInfo == 0) {
-    return "Wyciskanie na ławce prostej";
-  } else if ((chest = "B" && equipmentInfo == 0)) {
-    return "Wyciskanie na ławce skośnej";
-  } else if ((chest = "A" && equipmentInfo == 1)) {
-    return "Dipy";
-  } else if ((chest = "B" && equipmentInfo == 1)) {
-    return "Bar Dipy";
-  } else if ((chest = "A" && equipmentInfo == 2 && houseEquipment == 0)) {
-    return "Pompki klasyczne";
-  } else if ((chest = "A" && equipmentInfo == 2 && houseEquipment == 1)) {
-    return "Wyciskanie hantli na stołku";
-  } else if ((chest = "A" && equipmentInfo == 2 && houseEquipment == 2)) {
-    return "Pompki z gumą";
-  } else if ((chest = "A" && equipmentInfo == 2 && houseEquipment == 3)) {
-    return "Pompki klasyczne";
-  } else if ((chest = "B" && equipmentInfo == 2 && houseEquipment == 0)) {
-    return "Pompki diamentowe";
-  } else if ((chest = "B" && equipmentInfo == 2 && houseEquipment == 1)) {
-    return "Rozpiętki hantlami na stołku";
-  } else if ((chest = "B" && equipmentInfo == 2 && houseEquipment == 2)) {
-    return "Pompki diamentowe z gumą";
-  } else if ((chest = "B" && equipmentInfo == 2 && houseEquipment == 3)) {
-    return "Pompki diamentowe";
+
+  //   //Klata
+  if (chest == "A") {
+    if (equipmentInfo == 0) {
+      return "Wyciskanie na ławce prostej";
+    } else if (equipmentInfo == 1) {
+      return "Dipy";
+    } else if (equipmentInfo == 2) {
+      if (houseEquipment[1] == true) {
+        return "Wyciskanie hantli na stołku";
+      } else if (houseEquipment[2] == true) {
+        return "Pompki klasyczne z gumą";
+      } else {
+        return "Pompki klasyczne";
+      }
+    }
+  } else if (chest == "B") {
+    if (equipmentInfo == 0) {
+      return "Wyciskanie na ławce skośnej";
+    } else if (equipmentInfo == 1) {
+      return "Bar Dipy";
+    } else if (equipmentInfo == 2) {
+      if (houseEquipment[1] == true) {
+        return "Rozpiętki hantlami na stołku";
+      } else if (houseEquipment[2] == true) {
+        return "Pompki diamentowe z gumą";
+      } else {
+        return "Pompki diamentowe";
+      }
+    }
   }
+
   //Plecy
-  if (back == "A" && equipmentInfo == 0) {
-    return "Podciąganie";
-  } else if ((back = "B" && equipmentInfo == 0)) {
-    return "Wiosłowanie";
-  } else if ((back = "A" && equipmentInfo == 1)) {
-    return "Podciąganie";
-  } else if ((back = "B" && equipmentInfo == 1)) {
-    return "Podciąganie australijskie";
-  } else if ((back = "A" && equipmentInfo == 2 && houseEquipment == 0)) {
-    return "Podciąganie";
-  } else if ((back = "A" && equipmentInfo == 2 && houseEquipment == 1)) {
-  } else if ((back = "A" && equipmentInfo == 2 && houseEquipment == 2)) {
-  } else if ((back = "A" && equipmentInfo == 2 && houseEquipment == 3)) {
-  } else if ((back = "B" && equipmentInfo == 2 && houseEquipment == 0)) {
-  } else if ((back = "B" && equipmentInfo == 2 && houseEquipment == 1)) {
-  } else if ((back = "B" && equipmentInfo == 2 && houseEquipment == 2)) {
-  } else if ((back = "B" && equipmentInfo == 2 && houseEquipment == 3)) {
+  if (back == "A") {
+    if (equipmentInfo == 2) {
+      if (houseEquipment[0] == true) {
+        return "Podciąganie na drążku nachwytem";
+      } else if (houseEquipment[1] == true) {
+        return "Wiosłowanie hantlem";
+      } else if (houseEquipment[2] == true) {
+        return "Wiosłowanie gumą w opadzie tułowia";
+      } else {
+        return "Podciąganie australijskie nachwytem z użyciem stołu";
+      }
+    } else {
+      return "Podciąganie na drążku nachwytem";
+    }
+  }
+  if (back == "B") {
+    if (equipmentInfo == 0) {
+      return "Wiosłowanie sztangą";
+    } else if (equipmentInfo == 1) {
+      return "Podciąganie na drążku podchwytem";
+    } else if (equipmentInfo == 2) {
+      if (houseEquipment[0] == true) {
+        return "Podciąganie na drążku nachwytem";
+      } else if (houseEquipment[1] == true) {
+        return "Wiosłowanie hantlem";
+      } else if (houseEquipment[2] == true) {
+        return "Wiosłowanie gumą w opadzie tułowia";
+      } else {
+        return "Podciąganie australijskie podchwytem z użyciem stołu";
+      }
+    }
+  }
+  //Barki
+  if (delts == "A") {
+    if (equipmentInfo == 0) {
+      return "Wyciskanie żołnierskie sztangą";
+    } else if (equipmentInfo == 1) {
+      return "Pompki pike";
+    } else if (equipmentInfo == 2) {
+      if (houseEquipment == 1) {
+        return "Wznosy bokiem";
+      } else if (equipmentInfo == 2) {
+        return "Wyciskanie żołnierskie gumą oporową";
+      } else {
+        return "Pompki pike";
+      }
+    }
+  }
+  if (delts == "B") {
+    if (equipmentInfo == 0) {
+      return "Wyciskanie żołnierskie hantlami";
+    } else if (equipmentInfo == 1) {
+      return "Pompki pike";
+    } else if (equipmentInfo == 2) {
+      if (houseEquipment == 1) {
+        return "Wznosy bokiem";
+      } else if (equipmentInfo == 2) {
+        return "Wyciskanie żołnierskie gumą oporową";
+      } else {
+        return "Pompki pike";
+      }
+    }
   }
 }
-// function cardio(extraGoalInfo) {
-//   if (extraGoalInfo == 2) {
-//     return "bieganie", "20 minut";
-//   } else {
-//     return "Łydki", reps("side", data.goalInfo, data.extraGoalInfo);
+
+//   //Plecy
+//   if (back == "A" && equipmentInfo == 0) {
+//     return "Podciąganie";
+//   } else if ((back = "B" && equipmentInfo == 0)) {
+//     return "Wiosłowanie";
+//   } else if ((back = "A" && equipmentInfo == 1)) {
+//     return "Podciąganie";
+//   } else if ((back = "B" && equipmentInfo == 1)) {
+//     return "Podciąganie australijskie";
+//   } else if ((back = "A" && equipmentInfo == 2 && houseEquipment == 0)) {
+//     return "Podciąganie";
+//   } else if ((back = "A" && equipmentInfo == 2 && houseEquipment == 1)) {
+//   } else if ((back = "A" && equipmentInfo == 2 && houseEquipment == 2)) {
+//   } else if ((back = "A" && equipmentInfo == 2 && houseEquipment == 3)) {
+//   } else if ((back = "B" && equipmentInfo == 2 && houseEquipment == 0)) {
+//   } else if ((back = "B" && equipmentInfo == 2 && houseEquipment == 1)) {
+//   } else if ((back = "B" && equipmentInfo == 2 && houseEquipment == 2)) {
+//   } else if ((back = "B" && equipmentInfo == 2 && houseEquipment == 3)) {
 //   }
 // }
 function createPdf(data) {
