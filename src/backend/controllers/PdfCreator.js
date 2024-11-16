@@ -5,7 +5,9 @@ function countBMI(weight, height) {
   return (weight / (height * height)) * 10000;
 }
 function reps(type, goalInfo, extraGoalInfo) {
-  if (
+  if (type == "abs") {
+    return "3 serie do upadku mięśniowego";
+  } else if (
     type == "main" &&
     goalInfo == 0 &&
     (extraGoalInfo == 0 || extraGoalInfo == 1 || extraGoalInfo == 2)
@@ -32,19 +34,9 @@ function reps(type, goalInfo, extraGoalInfo) {
   }
   return "";
 }
-function exercise(
-  legs,
-  chest,
-  back,
-  delts,
-  triceps,
-  biceps,
-  abs,
-  equipmentInfo,
-  houseEquipment
-) {
+function exercise(type, equipmentInfo, houseEquipment) {
   //Nogi
-  if (legs == "A") {
+  if (type == "legsA") {
     if (equipmentInfo == 0) {
       return "Przysiad ze sztangą klasyczny";
     } else if (equipmentInfo == 1) {
@@ -58,7 +50,7 @@ function exercise(
         return "Przysiad z wyskokiem";
       }
     }
-  } else if (legs == "B") {
+  } else if (type == "legsB") {
     if (equipmentInfo == 0) {
       return "Martwy ciąg klasyczny";
     } else if (equipmentInfo == 1) {
@@ -73,7 +65,7 @@ function exercise(
   }
 
   //   //Klata
-  if (chest == "A") {
+  if (type == "chestA") {
     if (equipmentInfo == 0) {
       return "Wyciskanie na ławce prostej";
     } else if (equipmentInfo == 1) {
@@ -87,7 +79,7 @@ function exercise(
         return "Pompki klasyczne";
       }
     }
-  } else if (chest == "B") {
+  } else if (type == "chestB") {
     if (equipmentInfo == 0) {
       return "Wyciskanie na ławce skośnej";
     } else if (equipmentInfo == 1) {
@@ -104,7 +96,7 @@ function exercise(
   }
 
   //Plecy
-  if (back == "A") {
+  if (type == "backA") {
     if (equipmentInfo == 2) {
       if (houseEquipment[0] == true) {
         return "Podciąganie na drążku nachwytem";
@@ -119,7 +111,7 @@ function exercise(
       return "Podciąganie na drążku nachwytem";
     }
   }
-  if (back == "B") {
+  if (type == "backB") {
     if (equipmentInfo == 0) {
       return "Wiosłowanie sztangą";
     } else if (equipmentInfo == 1) {
@@ -136,65 +128,74 @@ function exercise(
       }
     }
   }
+
   //Barki
-  if (delts == "A") {
+  if (type == "delts") {
     if (equipmentInfo == 0) {
       return "Wyciskanie żołnierskie sztangą";
     } else if (equipmentInfo == 1) {
       return "Pompki pike";
     } else if (equipmentInfo == 2) {
-      if (houseEquipment == 1) {
+      if (houseEquipment[1] == true) {
         return "Wznosy bokiem";
-      } else if (equipmentInfo == 2) {
+      } else if (houseEquipment[2] == true) {
         return "Wyciskanie żołnierskie gumą oporową";
       } else {
         return "Pompki pike";
       }
     }
   }
-  if (delts == "B") {
+  //triceps
+  if (type == "triceps") {
     if (equipmentInfo == 0) {
-      return "Wyciskanie żołnierskie hantlami";
+      return "Wyciskanie francuskie";
     } else if (equipmentInfo == 1) {
-      return "Pompki pike";
+      return "Pompki w podporze tyłem";
     } else if (equipmentInfo == 2) {
-      if (houseEquipment == 1) {
-        return "Wznosy bokiem";
-      } else if (equipmentInfo == 2) {
-        return "Wyciskanie żołnierskie gumą oporową";
+      if (houseEquipment[1] == true) {
+        return "Wyciskanie francuskie hantlem zza głowy";
+      } else if (houseEquipment[2] == true) {
+        return "Prostowanie ramienia nad głową z gumą oporową";
       } else {
-        return "Pompki pike";
+        return "Pompki w podporze tyłem";
+      }
+    }
+  }
+  //biceps
+  if (type == "biceps") {
+    if (equipmentInfo == 0) {
+      return "Zginanie przedramion ze sztangą stojąc";
+    } else if (equipmentInfo == 1) {
+      return "Uginanie ramion z masą własnego ciała na poręczy";
+    } else if (equipmentInfo == 2) {
+      if (houseEquipment[1] == true) {
+        return "Zginanie przedramion hantlami stojąc";
+      } else if (houseEquipment[2] == true) {
+        return "Zginanie przedramion z gumą stojąc";
+      } else {
+        return "Uginanie ramion z masą własnego ciała przy pomocy stołu";
+      }
+    }
+  }
+  //brzuch
+  if (type == "abs") {
+    if (equipmentInfo == 0) {
+      return "Wznosy kolan wisząc na drążku";
+    } else if (equipmentInfo == 1) {
+      return "Wznosy kolan wisząc na drążku";
+    } else if (equipmentInfo == 2) {
+      if (houseEquipment[0] == true) {
+        return "Wznosy kolan wisząc na drążku";
+      } else {
+        return "deska";
       }
     }
   }
 }
-
-//   //Plecy
-//   if (back == "A" && equipmentInfo == 0) {
-//     return "Podciąganie";
-//   } else if ((back = "B" && equipmentInfo == 0)) {
-//     return "Wiosłowanie";
-//   } else if ((back = "A" && equipmentInfo == 1)) {
-//     return "Podciąganie";
-//   } else if ((back = "B" && equipmentInfo == 1)) {
-//     return "Podciąganie australijskie";
-//   } else if ((back = "A" && equipmentInfo == 2 && houseEquipment == 0)) {
-//     return "Podciąganie";
-//   } else if ((back = "A" && equipmentInfo == 2 && houseEquipment == 1)) {
-//   } else if ((back = "A" && equipmentInfo == 2 && houseEquipment == 2)) {
-//   } else if ((back = "A" && equipmentInfo == 2 && houseEquipment == 3)) {
-//   } else if ((back = "B" && equipmentInfo == 2 && houseEquipment == 0)) {
-//   } else if ((back = "B" && equipmentInfo == 2 && houseEquipment == 1)) {
-//   } else if ((back = "B" && equipmentInfo == 2 && houseEquipment == 2)) {
-//   } else if ((back = "B" && equipmentInfo == 2 && houseEquipment == 3)) {
-//   }
-// }
 function createPdf(data) {
   const doc = new PDFDocumentWithTables({ margin: 30, size: "A4" });
   doc.pipe(
-    fs.createWriteStream(
-      `../../documents/fitopolex/src/documents/PlanTreningowy_${data.firstName}.pdf`
-    )
+    fs.createWriteStream(`../../documents/fitopolex/src/documents/document.pdf`)
   );
   doc.text("Plan Treningowy");
   doc.font(
@@ -295,18 +296,36 @@ function createPdf(data) {
         title: "Plan A",
         headers: ["Ćwiczenie", "Ilość powtórzeń"],
         rows: [
-          ["Martwy Ciąg", reps("main", data.goalInfo, data.extraGoalInfo)],
           [
-            "Wyciskanie Żołnierskie",
+            exercise("legsA", data.equipmentInfo, data.houseEquipment),
             reps("main", data.goalInfo, data.extraGoalInfo),
           ],
-          ["Podciąganie", reps("main", data.goalInfo, data.extraGoalInfo)],
-          ["Wznosy bokiem", reps("side", data.goalInfo, data.extraGoalInfo)],
-          ["Biceps", reps("side", data.goalInfo, data.extraGoalInfo)],
-          ["Triceps", reps("side", data.goalInfo, data.extraGoalInfo)],
-          ["Deska", "3 razy do upadku mięśniowego"],
           [
-            data.extraGoalInfo == 2 ? "Bieganie" : "Łydki",
+            exercise("chestA", data.equipmentInfo, data.houseEquipment),
+            reps("main", data.goalInfo, data.extraGoalInfo),
+          ],
+          [
+            exercise("backA", data.equipmentInfo, data.houseEquipment),
+            reps("main", data.goalInfo, data.extraGoalInfo),
+          ],
+          [
+            exercise("delts", data.equipmentInfo, data.houseEquipment),
+            reps("side", data.goalInfo, data.extraGoalInfo),
+          ],
+          [
+            exercise("biceps", data.equipmentInfo, data.houseEquipment),
+            reps("side", data.goalInfo, data.extraGoalInfo),
+          ],
+          [
+            exercise("triceps", data.equipmentInfo, data.houseEquipment),
+            reps("side", data.goalInfo, data.extraGoalInfo),
+          ],
+          [
+            exercise("abs", data.equipmentInfo, data.houseEquipment),
+            reps("abs", data.goalInfo, data.extraGoalInfo),
+          ],
+          [
+            data.extraGoalInfo == 2 ? "Bieganie" : "Wspięcia na palcach",
             data.extraGoalInfo == 2
               ? "20 minut"
               : reps("side", data.goalInfo, data.extraGoalInfo),
@@ -333,25 +352,33 @@ function createPdf(data) {
         headers: ["Ćwiczenie", "ilość powtórzeń"],
         rows: [
           [
-            `Przysiad ${
-              data.equipmentInfo == 0
-                ? "ze sztanga"
-                : data.houseEquipment[2]
-                ? "z gumami"
-                : ""
-            }`,
+            exercise("legsB", data.equipmentInfo, data.houseEquipment),
             reps("main", data.goalInfo, data.extraGoalInfo),
           ],
           [
-            "Wyciskanie Żołnierskie",
+            exercise("chestB", data.equipmentInfo, data.houseEquipment),
             reps("main", data.goalInfo, data.extraGoalInfo),
           ],
-          ["Wiosłowanie", reps("main", data.goalInfo, data.extraGoalInfo)],
-          ["Wznosy bokiem", reps("side", data.goalInfo, data.extraGoalInfo)],
-          ["Podciąganie", reps("side", data.goalInfo, data.extraGoalInfo)],
-          ["Biceps", reps("side", data.goalInfo, data.extraGoalInfo)],
-          ["Triceps", reps("side", data.goalInfo, data.extraGoalInfo)],
-          ["Allahy", reps("side", data.goalInfo, data.extraGoalInfo)],
+          [
+            exercise("backB", data.equipmentInfo, data.houseEquipment),
+            reps("main", data.goalInfo, data.extraGoalInfo),
+          ],
+          [
+            exercise("delts", data.equipmentInfo, data.houseEquipment),
+            reps("side", data.goalInfo, data.extraGoalInfo),
+          ],
+          [
+            exercise("biceps", data.equipmentInfo, data.houseEquipment),
+            reps("side", data.goalInfo, data.extraGoalInfo),
+          ],
+          [
+            exercise("triceps", data.equipmentInfo, data.houseEquipment),
+            reps("side", data.goalInfo, data.extraGoalInfo),
+          ],
+          [
+            exercise("abs", data.equipmentInfo, data.houseEquipment),
+            reps("abs", data.goalInfo, data.extraGoalInfo),
+          ],
           [
             data.extraGoalInfo == 2 ? "Bieganie" : "Łydki",
             data.extraGoalInfo == 2
@@ -375,12 +402,9 @@ function createPdf(data) {
         columnsSize: [200, 100, 100],
       });
     }
-  }
-  //timeInfo==1 codziennie
-  else {
+  } else {
     console.log(data.timeInfo, "/??", typeof data.timeInfo, data);
     if (data.extraGoalInfo == 1) {
-      //dodaj tabelki biegowe
       const tableA = {
         title: "Tydzień 1-2",
         headers: ["Dzień", "Trening"],
@@ -494,6 +518,128 @@ function createPdf(data) {
         columnsSize: [200, 100, 100],
       });
     } else {
+      const tableA = {
+        title: "Plan A",
+        headers: ["Ćwiczenie", "Ilość powtórzeń"],
+        rows: [
+          [
+            exercise("legsA", data.equipmentInfo, data.houseEquipment),
+            reps("main", data.goalInfo, data.extraGoalInfo),
+          ],
+          [
+            exercise("legsB", data.equipmentInfo, data.houseEquipment),
+            reps("side", data.goalInfo, data.extraGoalInfo),
+          ],
+          [
+            data.extraGoalInfo == 2 ? "Bieganie" : "Wspięcia na palcach",
+            data.extraGoalInfo == 2
+              ? "20 minut"
+              : reps("side", data.goalInfo, data.extraGoalInfo),
+          ],
+        ],
+      };
+      doc.table(tableA, {
+        prepareHeader: () => {
+          doc.font(
+            "../../documents/fitopolex/src/fonts/RobotoSlab-VariableFont_wght.ttf"
+          );
+        },
+        prepareRow: () => {
+          doc.font(
+            "../../documents/fitopolex/src/fonts/RobotoSlab-VariableFont_wght.ttf"
+          );
+        },
+        width: 300,
+        columnsSize: [200, 100, 100],
+      });
+      const tableB = {
+        title: "Plan B",
+        headers: ["Ćwiczenie", "Ilość powtórzeń"],
+        rows: [
+          [
+            exercise("chestA", data.equipmentInfo, data.houseEquipment),
+            reps("main", data.goalInfo, data.extraGoalInfo),
+          ],
+          [
+            exercise("chestB", data.equipmentInfo, data.houseEquipment),
+            reps("side", data.goalInfo, data.extraGoalInfo),
+          ],
+          [
+            exercise("delts", data.equipmentInfo, data.houseEquipment),
+            reps("side", data.goalInfo, data.extraGoalInfo),
+          ],
+          [
+            exercise("triceps", data.equipmentInfo, data.houseEquipment),
+            reps("side", data.goalInfo, data.extraGoalInfo),
+          ],
+          [
+            exercise("abs", data.equipmentInfo, data.houseEquipment),
+            reps("abs", data.goalInfo, data.extraGoalInfo),
+          ],
+          [
+            data.extraGoalInfo == 2 ? "Bieganie" : "Wspięcia na palcach",
+            data.extraGoalInfo == 2
+              ? "20 minut"
+              : reps("side", data.goalInfo, data.extraGoalInfo),
+          ],
+        ],
+      };
+      doc.table(tableB, {
+        prepareHeader: () => {
+          doc.font(
+            "../../documents/fitopolex/src/fonts/RobotoSlab-VariableFont_wght.ttf"
+          );
+        },
+        prepareRow: () => {
+          doc.font(
+            "../../documents/fitopolex/src/fonts/RobotoSlab-VariableFont_wght.ttf"
+          );
+        },
+        width: 300,
+        columnsSize: [200, 100, 100],
+      });
+      const tableC = {
+        title: "Plan C",
+        headers: ["Ćwiczenie", "Ilość powtórzeń"],
+        rows: [
+          [
+            exercise("backA", data.equipmentInfo, data.houseEquipment),
+            reps("main", data.goalInfo, data.extraGoalInfo),
+          ],
+          [
+            exercise("backB", data.equipmentInfo, data.houseEquipment),
+            reps("side", data.goalInfo, data.extraGoalInfo),
+          ],
+          [
+            exercise("Biceps", data.equipmentInfo, data.houseEquipment),
+            reps("side", data.goalInfo, data.extraGoalInfo),
+          ],
+          [
+            exercise("abs", data.equipmentInfo, data.houseEquipment),
+            reps("abs", data.goalInfo, data.extraGoalInfo),
+          ],
+          [
+            data.extraGoalInfo == 2 ? "Bieganie" : "Wspięcia na palcach",
+            data.extraGoalInfo == 2
+              ? "20 minut"
+              : reps("side", data.goalInfo, data.extraGoalInfo),
+          ],
+        ],
+      };
+      doc.table(tableC, {
+        prepareHeader: () => {
+          doc.font(
+            "../../documents/fitopolex/src/fonts/RobotoSlab-VariableFont_wght.ttf"
+          );
+        },
+        prepareRow: () => {
+          doc.font(
+            "../../documents/fitopolex/src/fonts/RobotoSlab-VariableFont_wght.ttf"
+          );
+        },
+        width: 300,
+        columnsSize: [200, 100, 100],
+      });
     }
   }
 
