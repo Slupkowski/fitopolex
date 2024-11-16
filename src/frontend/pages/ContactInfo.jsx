@@ -37,11 +37,14 @@ export const ContactInfo = () => {
         });
         const data = await response.json();
         console.log("Response from server:", data);
+        let domainName = window.location.hostname;
+
+        window.open("http://localhost:3000/document.pdf", "_blank");
+        navigate("/sent");
       } catch (error) {
         console.error("Error submitting form:", error);
+        navigate("/fail");
       }
-
-      navigate("/sent");
     }
   };
 
@@ -129,7 +132,7 @@ export const ContactInfo = () => {
                 <ControlledSingleCheckbox
                   name="agreeSafety"
                   inputName={
-                    "Jestem świadomy że wygenerowany plan treningowy NIE został opracowany przez profesjonalistów i nie ponoszą oni odpowiedzialności za moje zdebilnienie"
+                    "Jestem świadomy że wygenerowany plan treningowy NIE został opracowany przez profesjonalistów i nie ponoszą oni odpowiedzialności za moje czyny"
                   }
                   isRequired={true}
                   control={control}

@@ -23,51 +23,47 @@ const client = new MongoClient(uri, {
   },
 });
 
-async function run() {
-  try {
-    console.log("Connecting to MongoDB...");
-    await client.connect();
-    console.log("Connected to MongoDB");
-
-    const db = client.db("Customers");
-    const coll = db.collection("Customers");
-
-    console.log("Retrieving documents from the collection...");
-    const cursor = coll.find();
-
-    // Check if cursor has documents
-    const results = await cursor.toArray();
-    if (results.length > 0) {
-      console.log("Found documents:");
-      results.forEach((doc, i) => {
-        console.log(`${i + 1}: ${JSON.stringify(doc)}`);
-      });
-    } else {
-      console.log("No documents found!");
-    }
-  } catch (err) {
-    console.error(
-      "An error occurred while connecting to MongoDB or retrieving data:",
-      err
-    );
-  } finally {
-    console.log("Closing MongoDB connection");
-    await client.close();
-  }
-}
-run().catch(console.dir);
-
 const app = express();
 app.use(cors());
 app.use(express.json()); // Middleware to parse JSON
+app.use(express.static(path.join(__dirname, "../documents")));
 
 // Endpoint do obsługi POST requestu
 app.post("/contactInfo", (req, res) => {
   const formData = req.body; // Odebrane dane z formularza
   console.log("Received data:", formData);
-  saveContactInfo(formData);
+  const dataResult = saveContactInfo(formData);
 
-  // Tutaj możesz zrobić cokolwiek z danymi - przetworzyć je, zwrócić odpowiedź itp.
+  email
+    .send({
+      template: path.join(__dirname, "emails", "plan"),
+      message: {
+        to: dataResult.mailName,
+        attachments: [
+          {
+            filename: "document.pdf",
+            path: path.join(__dirname, "../documents", "document.pdf"),
+          },
+        ],
+      },
+      locals: {
+        name: dataResult.firstName,
+      },
+    })
+    .then((result) => {
+      console.log("Email sent to", dataResult.mailName, result);
+      res
+        .status(200)
+        .json({ status: "success", message: "Email sent successfully" });
+    })
+    .catch((err) => {
+      console.error("Error sending email:", err);
+      res.status(500).json({
+        status: "error",
+        message: "Failed to send email, please try again.",
+      });
+    });
+
   res
     .status(200)
     .json({ message: "Data received successfully", data: formData });
@@ -78,7 +74,6 @@ app.post("/trainingInfo", (req, res) => {
   console.log("Received data:", formData);
   saveTrainingInfo(formData);
 
-  // Tutaj możesz zrobić cokolwiek z danymi - przetworzyć je, zwrócić odpowiedź itp.
   res
     .status(200)
     .json({ message: "Data received successfully", data: formData });
@@ -89,7 +84,6 @@ app.post("/personalInfo", (req, res) => {
   console.log("Received data:", formData);
   savePersonalInfo(formData);
 
-  // Tutaj możesz zrobić cokolwiek z danymi - przetworzyć je, zwrócić odpowiedź itp.
   res
     .status(200)
     .json({ message: "Data received successfully", data: formData });
@@ -122,8 +116,35 @@ const email = new Email({
 });
 
 app.post("/sendEmail", async (req, res) => {
-  const { firstName, lastName, mailName, phoneNumber } = req.body;
-  console.log(path.join(__dirname, "emails", "welcome"));
+  const { firstName, lastName, mailName, phoneNumber, productId } = req.body;
+  let amountOfDocuments;
+  try {
+    await client.connect();
+    console.log("Connected to MongoDB");
+
+    const db = client.db("Customers");
+    const coll = db.collection("Customers");
+
+    amountOfDocuments = await coll.countDocuments();
+
+    const newOrder = {
+      name: `${firstName} ${lastName}`,
+      email: mailName,
+      phoneNumber: phoneNumber,
+      productId: productId,
+    };
+
+    await coll.insertOne(newOrder);
+  } catch (err) {
+    console.error(
+      "An error occurred while connecting to MongoDB or retrieving data:",
+      err
+    );
+  } finally {
+    console.log("Closing MongoDB connection");
+    await client.close();
+  }
+
   email
     .send({
       template: path.join(__dirname, "emails", "welcome"),
@@ -132,6 +153,7 @@ app.post("/sendEmail", async (req, res) => {
       },
       locals: {
         name: `${firstName} ${lastName}`,
+        orderId: `#${amountOfDocuments + 1}`,
       },
     })
     .then((result) => {

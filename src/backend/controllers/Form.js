@@ -11,12 +11,14 @@ function saveContactInfo(data) {
 
   // tutaj funkcja do generowania pdfu, jako argument form
   createPdf(form);
+  return { firstName: form.firstName, mailName: form.mailName };
 }
 function saveTrainingInfo(data) {
   form.timeInfo = data.timeInfo;
   form.extraGoalInfo = data.extraGoalInfo;
   form.goalInfo = data.goalInfo;
   form.equipmentInfo = data.equipmentInfo;
+  form.houseEquipment = data.houseEquipment;
   console.log(form);
 }
 function savePersonalInfo(data) {

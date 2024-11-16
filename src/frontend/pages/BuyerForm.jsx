@@ -1,21 +1,28 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { buyerFormSchema } from "../utils/BuyerFormSchema.js";
 import { Header } from "../components/Header";
 import { NextButton } from "../components/NextButton";
 import { Box, FormControl, Typography } from "@mui/material";
 import { createPalette } from "../theme/palette";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { ControlledSingleCheckbox } from "../components/controlled/ControlledSingleCheckbox";
 import { ControlledInputField } from "../components/controlled/ControlledInputField";
 import { useForm } from "react-hook-form";
 const { neutral } = createPalette();
 
 export const BuyerForm = () => {
+  const [product, setProduct] = useState();
   const navigate = useNavigate();
+  const location = useLocation();
   const { control, handleSubmit, setValue, formState, getValues } = useForm({
     resolver: zodResolver(buyerFormSchema),
   });
+
+  useEffect(() => {
+    const { state } = location;
+    setProduct(state.product);
+  }, [location]);
 
   useEffect(() => {
     setValue("agreeContact", false);
@@ -33,15 +40,15 @@ export const BuyerForm = () => {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(values),
+          body: JSON.stringify({ ...values, productId: product }),
         });
         const data = await response.json();
         console.log("Response from server:", data);
+        navigate("/sent");
       } catch (error) {
         console.error("Error submitting form:", error);
+        navigate("/fail");
       }
-
-      navigate("/sent");
     }
   };
 

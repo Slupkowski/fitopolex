@@ -10,13 +10,15 @@ function Form(
   firstName = null,
   mailName = null,
   agreeContact = null,
-  agreeSafety = null
+  agreeSafety = null,
+  houseEquipment = null
 ) {
   return {
     timeInfo,
     extraGoalInfo,
     goalInfo,
     equipmentInfo,
+    houseEquipment,
     gender,
     age,
     height,
