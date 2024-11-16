@@ -3,21 +3,25 @@ import ImageSlider from "../components/ImageSlider";
 import { Box, Typography } from "@mui/material";
 import { createPalette } from "../theme/palette";
 import img1 from "../images/image-1.jpg";
+import maupaprzysiad from "../images/maupaprzysiad.png";
+import maupamartwy from "../images/maupamartwy.png";
+import maupasprint from "../images/maupasprint.png";
+import maupaposing from "../images/maupaposing.png";
 import img2 from "../images/image-2.jpg";
 import img3 from "../images/image-3.jpg";
 import img4 from "../images/image-4.jpg";
 
 export const Welcome = () => {
   const slides = [
-    { url: img1, title: "red" },
-    { url: img2, title: "blue" },
-    { url: img3, title: "green" },
-    { url: img4, title: "yellow" },
+    { url: maupaprzysiad, title: "red" },
+    { url: maupamartwy, title: "blue" },
+    { url: maupasprint, title: "green" },
+    { url: maupaposing, title: "yellow" },
   ];
 
   const containerStyles = {
-    width: "80%",
-    height: "400px",
+    width: "1000px",
+    height: "500px",
     margin: "0 auto",
     borderRadius: "20px",
   };
