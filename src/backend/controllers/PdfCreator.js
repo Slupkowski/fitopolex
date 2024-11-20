@@ -7,6 +7,10 @@ function countBMI(weight, height) {
 function reps(type, goalInfo, extraGoalInfo) {
   if (type == "abs") {
     return "3 serie do upadku mięśniowego";
+  } else if (type == "calves" && (extraGoalInfo == 1 || extraGoalInfo == 2)) {
+    return "20 minut";
+  } else if (type == "calves" && extraGoalInfo == 0) {
+    return "3x12";
   } else if (
     type == "main" &&
     goalInfo == 0 &&
@@ -34,7 +38,7 @@ function reps(type, goalInfo, extraGoalInfo) {
   }
   return "";
 }
-function exercise(type, equipmentInfo, houseEquipment) {
+function exercise(type, equipmentInfo, houseEquipment, extraGoalInfo) {
   //Nogi
   if (type == "legsA") {
     if (equipmentInfo == 0) {
@@ -54,12 +58,12 @@ function exercise(type, equipmentInfo, houseEquipment) {
     if (equipmentInfo == 0) {
       return "Martwy ciąg klasyczny";
     } else if (equipmentInfo == 1) {
-      return "Horse stance";
+      return "Wykroki";
     } else if (equipmentInfo == 2) {
       if (houseEquipment[1] == true) {
-        return "Horse stance z hantlami";
+        return "Wykroki z hantlami";
       } else {
-        return "Horse stance";
+        return "Wykroki";
       }
     }
   }
@@ -69,10 +73,10 @@ function exercise(type, equipmentInfo, houseEquipment) {
     if (equipmentInfo == 0) {
       return "Wyciskanie na ławce prostej";
     } else if (equipmentInfo == 1) {
-      return "Dipy";
+      return "Pompki na poręczach";
     } else if (equipmentInfo == 2) {
       if (houseEquipment[1] == true) {
-        return "Wyciskanie hantli na stołku";
+        return "Wyciskanie hantli na podłodze";
       } else if (houseEquipment[2] == true) {
         return "Pompki klasyczne z gumą";
       } else {
@@ -83,10 +87,10 @@ function exercise(type, equipmentInfo, houseEquipment) {
     if (equipmentInfo == 0) {
       return "Wyciskanie na ławce skośnej";
     } else if (equipmentInfo == 1) {
-      return "Bar Dipy";
+      return "Pompki na drążku";
     } else if (equipmentInfo == 2) {
       if (houseEquipment[1] == true) {
-        return "Rozpiętki hantlami na stołku";
+        return "Rozpiętki hantlami na podłodze";
       } else if (houseEquipment[2] == true) {
         return "Pompki diamentowe z gumą";
       } else {
@@ -153,9 +157,9 @@ function exercise(type, equipmentInfo, houseEquipment) {
       return "Pompki w podporze tyłem";
     } else if (equipmentInfo == 2) {
       if (houseEquipment[1] == true) {
-        return "Wyciskanie francuskie hantlem zza głowy";
+        return "Wyciskanie francuskie hantlami w leżeniu na podłodze";
       } else if (houseEquipment[2] == true) {
-        return "Prostowanie ramienia nad głową z gumą oporową";
+        return "Prostowanie ramion z gumą oporową";
       } else {
         return "Pompki w podporze tyłem";
       }
@@ -191,6 +195,13 @@ function exercise(type, equipmentInfo, houseEquipment) {
       }
     }
   }
+  //łydki
+  if (type == "calves")
+    if (extraGoalInfo == 1 || extraGoalInfo == 2) {
+      return "Bieganie";
+    } else {
+      return "Wspięcia na palcach";
+    }
 }
 function createPdf(data) {
   const doc = new PDFDocumentWithTables({ margin: 30, size: "A4" });
@@ -203,23 +214,22 @@ function createPdf(data) {
   );
   doc.text(
     data.goalInfo == 0
-      ? "Na chudnięcie"
+      ? "Plan na chudnięcie"
       : data.goalInfo == 1
-      ? "Na budowę mięśni"
-      : "Na budowę mięśni i chudnięcie"
+      ? "Plan na budowę mięśni"
+      : "Plan na budowę mięśni i chudnięcie"
   );
 
   doc.text(data.firstName);
   doc.text("");
 
   doc.text(data.gender == "female" ? "Kobieta" : "Mężczyzna");
-  doc.text(data.age);
-  doc.text(`BMI:${countBMI(data.weight, data.height).toFixed(2)}`);
+  doc.text(`Wiek: ${data.age}`);
+  doc.text(`BMI: ${countBMI(data.weight, data.height).toFixed(2)}`);
   console.log(countBMI(data.weight, data.height));
 
   if (data.timeInfo == 0 || data.timeInfo == 2) {
-    if (data.extraGoalInfo == 1) {
-      //dodaj tabelki biegowe
+    if (data.extraGoalInfo == 1 && data.goalInfo == 0) {
       const tableA = {
         title: "Tydzień 1-2",
         headers: ["Dzień", "Trening"],
@@ -238,14 +248,23 @@ function createPdf(data) {
           ],
         ],
       };
+      const tableWidth = 400;
+      const pageWidth = doc.page.width;
+      const xPosition = (pageWidth - tableWidth) / 2;
       doc.table(tableA, {
+        prepareHeader: () => {
+          doc.font(
+            "../../documents/fitopolex/src/fonts/RobotoSlab-VariableFont_wght.ttf"
+          );
+        },
         prepareRow: () => {
           doc.font(
             "../../documents/fitopolex/src/fonts/RobotoSlab-VariableFont_wght.ttf"
           );
         },
-        width: 300,
-        columnsSize: [200, 100, 100],
+        width: tableWidth,
+        columnsSize: [200, 200],
+        x: xPosition,
       });
       const tableB = {
         title: "Tydzień 3-4",
@@ -266,8 +285,18 @@ function createPdf(data) {
         ],
       };
       doc.table(tableB, {
-        width: 300,
-        columnsSize: [200, 100, 100],
+        prepareHeader: () => {
+          doc.font(
+            "../../documents/fitopolex/src/fonts/RobotoSlab-VariableFont_wght.ttf"
+          );
+        },
+        prepareRow: () => {
+          doc.font(
+            "../../documents/fitopolex/src/fonts/RobotoSlab-VariableFont_wght.ttf"
+          );
+        },
+        width: 400,
+        columnsSize: [200, 200],
       });
       const tableC = {
         title: "Tydzień 5-6",
@@ -288,8 +317,18 @@ function createPdf(data) {
         ],
       };
       doc.table(tableC, {
-        width: 300,
-        columnsSize: [200, 100, 100],
+        prepareHeader: () => {
+          doc.font(
+            "../../documents/fitopolex/src/fonts/RobotoSlab-VariableFont_wght.ttf"
+          );
+        },
+        prepareRow: () => {
+          doc.font(
+            "../../documents/fitopolex/src/fonts/RobotoSlab-VariableFont_wght.ttf"
+          );
+        },
+        width: 400,
+        columnsSize: [200, 200],
       });
     } else {
       const tableA = {
@@ -325,13 +364,19 @@ function createPdf(data) {
             reps("abs", data.goalInfo, data.extraGoalInfo),
           ],
           [
-            data.extraGoalInfo == 2 ? "Bieganie" : "Wspięcia na palcach",
-            data.extraGoalInfo == 2
-              ? "20 minut"
-              : reps("side", data.goalInfo, data.extraGoalInfo),
+            exercise(
+              "calves",
+              data.equipmentInfo,
+              data.houseEquipment,
+              data.extraGoalInfo
+            ),
+            reps("calves", data.goalInfo, data.extraGoalInfo),
           ],
         ],
       };
+      const tableWidth = 400;
+      const pageWidth = doc.page.width;
+      const xPosition = (pageWidth - tableWidth) / 2;
       doc.table(tableA, {
         prepareHeader: () => {
           doc.font(
@@ -343,8 +388,9 @@ function createPdf(data) {
             "../../documents/fitopolex/src/fonts/RobotoSlab-VariableFont_wght.ttf"
           );
         },
-        width: 300,
-        columnsSize: [200, 100, 100],
+        width: tableWidth,
+        columnsSize: [200, 200],
+        x: xPosition,
       });
 
       const tableB = {
@@ -380,10 +426,13 @@ function createPdf(data) {
             reps("abs", data.goalInfo, data.extraGoalInfo),
           ],
           [
-            data.extraGoalInfo == 2 ? "Bieganie" : "Łydki",
-            data.extraGoalInfo == 2
-              ? "20 minut"
-              : reps("side", data.goalInfo, data.extraGoalInfo),
+            exercise(
+              "calves",
+              data.equipmentInfo,
+              data.houseEquipment,
+              data.extraGoalInfo
+            ),
+            reps("calves", data.goalInfo, data.extraGoalInfo),
           ],
         ],
       };
@@ -398,8 +447,8 @@ function createPdf(data) {
             "../../documents/fitopolex/src/fonts/RobotoSlab-VariableFont_wght.ttf"
           );
         },
-        width: 300,
-        columnsSize: [200, 100, 100],
+        width: 400,
+        columnsSize: [200, 200],
       });
     }
   } else {
@@ -430,6 +479,9 @@ function createPdf(data) {
           ],
         ],
       };
+      const tableWidth = 400;
+      const pageWidth = doc.page.width;
+      const xPosition = (pageWidth - tableWidth) / 2;
       doc.table(tableA, {
         prepareHeader: () => {
           doc.font(
@@ -441,8 +493,9 @@ function createPdf(data) {
             "../../documents/fitopolex/src/fonts/RobotoSlab-VariableFont_wght.ttf"
           );
         },
-        width: 300,
-        columnsSize: [200, 100, 100],
+        width: tableWidth,
+        columnsSize: [200, 200],
+        x: xPosition,
       });
       doc.addPage();
       const tableB = {
@@ -478,8 +531,8 @@ function createPdf(data) {
             "../../documents/fitopolex/src/fonts/RobotoSlab-VariableFont_wght.ttf"
           );
         },
-        width: 300,
-        columnsSize: [200, 100, 100],
+        width: 400,
+        columnsSize: [200, 200],
       });
       const tableC = {
         title: "Tydzień 5-6",
@@ -514,8 +567,8 @@ function createPdf(data) {
             "../../documents/fitopolex/src/fonts/RobotoSlab-VariableFont_wght.ttf"
           );
         },
-        width: 300,
-        columnsSize: [200, 100, 100],
+        width: 400,
+        columnsSize: [200, 200],
       });
     } else {
       const tableA = {
@@ -531,13 +584,19 @@ function createPdf(data) {
             reps("side", data.goalInfo, data.extraGoalInfo),
           ],
           [
-            data.extraGoalInfo == 2 ? "Bieganie" : "Wspięcia na palcach",
-            data.extraGoalInfo == 2
-              ? "20 minut"
-              : reps("side", data.goalInfo, data.extraGoalInfo),
+            exercise("calves", data.equipmentInfo, data.houseEquipment),
+            reps(
+              "calves",
+              data.goalInfo,
+              data.extraGoalInfo,
+              data.extraGoalInfo
+            ),
           ],
         ],
       };
+      const tableWidth = 400;
+      const pageWidth = doc.page.width;
+      const xPosition = (pageWidth - tableWidth) / 2;
       doc.table(tableA, {
         prepareHeader: () => {
           doc.font(
@@ -549,9 +608,11 @@ function createPdf(data) {
             "../../documents/fitopolex/src/fonts/RobotoSlab-VariableFont_wght.ttf"
           );
         },
-        width: 300,
-        columnsSize: [200, 100, 100],
+        width: tableWidth,
+        columnsSize: [200, 200],
+        x: xPosition,
       });
+
       const tableB = {
         title: "Plan B",
         headers: ["Ćwiczenie", "Ilość powtórzeń"],
@@ -577,10 +638,13 @@ function createPdf(data) {
             reps("abs", data.goalInfo, data.extraGoalInfo),
           ],
           [
-            data.extraGoalInfo == 2 ? "Bieganie" : "Wspięcia na palcach",
-            data.extraGoalInfo == 2
-              ? "20 minut"
-              : reps("side", data.goalInfo, data.extraGoalInfo),
+            exercise("calves", data.equipmentInfo, data.houseEquipment),
+            reps(
+              "calves",
+              data.goalInfo,
+              data.extraGoalInfo,
+              data.extraGoalInfo
+            ),
           ],
         ],
       };
@@ -595,8 +659,8 @@ function createPdf(data) {
             "../../documents/fitopolex/src/fonts/RobotoSlab-VariableFont_wght.ttf"
           );
         },
-        width: 300,
-        columnsSize: [200, 100, 100],
+        width: 400,
+        columnsSize: [200, 200],
       });
       const tableC = {
         title: "Plan C",
@@ -611,7 +675,7 @@ function createPdf(data) {
             reps("side", data.goalInfo, data.extraGoalInfo),
           ],
           [
-            exercise("Biceps", data.equipmentInfo, data.houseEquipment),
+            exercise("biceps", data.equipmentInfo, data.houseEquipment),
             reps("side", data.goalInfo, data.extraGoalInfo),
           ],
           [
@@ -619,10 +683,13 @@ function createPdf(data) {
             reps("abs", data.goalInfo, data.extraGoalInfo),
           ],
           [
-            data.extraGoalInfo == 2 ? "Bieganie" : "Wspięcia na palcach",
-            data.extraGoalInfo == 2
-              ? "20 minut"
-              : reps("side", data.goalInfo, data.extraGoalInfo),
+            exercise("calves", data.equipmentInfo, data.houseEquipment),
+            reps(
+              "calves",
+              data.goalInfo,
+              data.extraGoalInfo,
+              data.extraGoalInfo
+            ),
           ],
         ],
       };
@@ -637,8 +704,8 @@ function createPdf(data) {
             "../../documents/fitopolex/src/fonts/RobotoSlab-VariableFont_wght.ttf"
           );
         },
-        width: 300,
-        columnsSize: [200, 100, 100],
+        width: 400,
+        columnsSize: [200, 200],
       });
     }
   }

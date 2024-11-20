@@ -52,9 +52,6 @@ app.post("/contactInfo", (req, res) => {
     })
     .then((result) => {
       console.log("Email sent to", dataResult.mailName, result);
-      res
-        .status(200)
-        .json({ status: "success", message: "Email sent successfully" });
     })
     .catch((err) => {
       console.error("Error sending email:", err);
@@ -145,6 +142,8 @@ app.post("/sendEmail", async (req, res) => {
     await client.close();
   }
 
+  const price = productId == "1" ? "10 zł" : "20 zł";
+
   email
     .send({
       template: path.join(__dirname, "emails", "welcome"),
@@ -154,6 +153,7 @@ app.post("/sendEmail", async (req, res) => {
       locals: {
         name: `${firstName} ${lastName}`,
         orderId: `#${amountOfDocuments + 1}`,
+        price: `${price}`,
       },
     })
     .then((result) => {
