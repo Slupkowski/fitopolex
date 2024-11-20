@@ -5,11 +5,9 @@ import {
   Button,
   AppBar,
   Toolbar,
-  IconButton,
   ButtonGroup,
   Popover,
 } from "@mui/material";
-import { AccountCircleSharp, ShoppingCartSharp } from "@mui/icons-material";
 
 export function Header() {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -61,16 +59,21 @@ export function Header() {
           gap: "30px",
         }}
       >
-        <h1 color="blue.250" onClick={handleClickHome}>
+        <h1
+          color="blue.250"
+          onClick={handleClickHome}
+          style={{ cursor: "pointer" }}
+          sx={{
+            cursor: "pointer",
+            "&:hover": {
+              textDecoration: "underline",
+            },
+          }}
+        >
           MAUPAPP
         </h1>
-        <IconButton
-          size="large"
-          aria-label="AccountCircleSharpIcon"
-        ></IconButton>
         <ButtonGroup fullWidth={true}>
-          <Button onClick={handleClickAbout}>O nas</Button>
-          <Button onClick={handleClick}>Cele</Button>
+          {/* <Button onClick={handleClick}>Cele</Button>
           <Popover
             id={id}
             open={open}
@@ -92,8 +95,10 @@ export function Header() {
                 Jak nabrać masy mięśniowej
               </Button>
             </Box>
-          </Popover>
+          </Popover> */}
           <Button onClick={handleClickPlans}>Plany Treningowe</Button>
+          <Button onClick={handleClickAbout}>Atlas Ćwiczeń</Button>
+
           <Button onClick={handleClickContact}>Kontakt</Button>
         </ButtonGroup>
         <Box
@@ -101,14 +106,7 @@ export function Header() {
             display: "flex",
             flexDirection: "row",
           }}
-        >
-          <IconButton size="large" aria-label="AccountCircleSharpIcon">
-            <AccountCircleSharp />
-          </IconButton>
-          <IconButton size="large" aria-label="AccountCircleSharpIcon">
-            <ShoppingCartSharp />
-          </IconButton>
-        </Box>
+        ></Box>
       </Toolbar>
     </AppBar>
   );
