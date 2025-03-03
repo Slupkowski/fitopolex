@@ -15,13 +15,6 @@ import { Fail } from "./pages/Fail";
 import { BuyerForm } from "./pages/BuyerForm";
 
 const App = () => {
-  const apiCall = () => {
-    axios.get("http://localhost:3000").then((data) => {
-      //this console.log will be in our frontend console
-      console.log(data);
-    });
-  };
-
   return (
     <div>
       <Routes>
@@ -39,12 +32,6 @@ const App = () => {
         <Route exact path="/fail" element={<Fail />} />
         <Route exact path="/buyerform" element={<BuyerForm />} />
       </Routes>
-      {/* <p className="text-3xl font-bold underline"> Grypsuje...</p>
-      <button onClick={apiCall}>Make API Call</button>
-      <Button>Tomek</Button>
-      <Button variant="contained" size="large" color="error">
-        ZARA TO ROZPIERDOLE
-      </Button> */}
     </div>
   );
 };

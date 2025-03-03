@@ -63,7 +63,7 @@ export const Plans = () => {
               justifyContent: "center",
               alignItems: "center",
               padding: "20px",
-              gap: "20px", // Odstęp między elementami
+              gap: "20px",
             }}
           >
             <Plan

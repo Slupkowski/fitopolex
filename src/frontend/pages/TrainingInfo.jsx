@@ -11,10 +11,9 @@ import { useForm } from "react-hook-form";
 const { neutral } = createPalette();
 
 export const TrainingInfo = () => {
-  const { watch, control, setValue, handleSubmit, formState, getValues } =
-    useForm({
-      resolver: zodResolver(trainingInfoSchema),
-    });
+  const { watch, control, setValue, handleSubmit, formState } = useForm({
+    resolver: zodResolver(trainingInfoSchema),
+  });
   const timeInfo = watch("timeInfo");
   const extraGoalInfo = watch("extraGoalInfo");
   const goalInfo = watch("goalInfo");

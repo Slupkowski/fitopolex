@@ -95,9 +95,7 @@ const email = new Email({
   message: {
     from: `"NodeJS" <${process.env.SENDER_EMAIL}>`,
   },
-  //textOnly: true,
   send: true,
-  //preview: false
   transport: {
     host: process.env.SMTP_HOST,
     port: process.env.SMTP_PORT,

@@ -38,6 +38,7 @@ function reps(type, goalInfo, extraGoalInfo) {
   }
   return "";
 }
+
 function exercise(type, equipmentInfo, houseEquipment, extraGoalInfo) {
   //Nogi
   if (type == "legsA") {
@@ -222,7 +223,6 @@ function createPdf(data) {
 
   doc.text(data.firstName);
   doc.text("");
-
   doc.text(data.gender == "female" ? "Kobieta" : "Mężczyzna");
   doc.text(`Wiek: ${data.age}`);
   doc.text(`BMI: ${countBMI(data.weight, data.height).toFixed(2)}`);
@@ -709,7 +709,14 @@ function createPdf(data) {
       });
     }
   }
-
+  doc.text(`Progresja`);
+  doc.text(
+    `Żeby budować mięśnie i kondycję trzeba progresować, żeby to robic, najlepiej co trening dodawać ciężaru, bądź zwiększać liczbę powtórzeń w seriach. Jeśli chodzi o trening biegowy, trzeba biec dłuzej. `
+  );
+  doc.text(`Zmiana wagi`);
+  doc.text(
+    `Aby schudnąć, musisz jeść mniej kalorii, niż spalasz w ciągu dnia. Najpierw oblicz swoje zapotrzebowanie kaloryczne, a potem wprowadź deficyt, czyli zmniejsz ilość spożywanych kalorii o około 300–500 dziennie. W takiej sytuacji organizm zacznie czerpać energię z zapasów tłuszczu, co pozwoli na utratę wagi. Jeśli chcesz przytyć, zrób odwrotnie – jedz więcej kalorii, niż spalasz. Oblicz swoje zapotrzebowanie kaloryczne i dodaj do niego 300–500 kalorii dziennie. Dzięki temu organizm będzie miał nadwyżkę energii, którą wykorzysta na budowę masy mięśniowej (jeśli trenujesz) lub zgromadzi ją jako zapasy, co prowadzi do zwiększenia wagi. Kluczem jest regularne liczenie kalorii. Swoje zapotrzebowanie kaloryczne można wstępnie obliczyć jednym z wielu kalkulatorów online, a potem od tej wartości odjąć lub dodać kalorie zależnie od naszego celu.`
+  );
   doc.end();
 }
 module.exports = { createPdf };

@@ -31,7 +31,7 @@ export const Welcome = () => {
       <Box sx={{ marginTop: "40px" }} />
       <Box
         sx={{
-          width: "1000px",
+          width: "1160px",
           height: "auto",
           margin: "0 auto",
           display: "flex",
